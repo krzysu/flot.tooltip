@@ -1,0 +1,26 @@
+Flot.tooltip is a tooltip plugin for wonderful Flot plotting library.
+Check http://code.google.com/p/flot/ for Flot details.
+
+This is version 0.1 so it may have some issues.
+It was tested only with bar charts.
+Works also with Time series data.
+
+See the example.html file and source code of plugin for details of how to use it.
+More info will be soon (I hope so)..
+
+Important!
+----------
+You need to set hoverable to true or this tooltip plugin does not work.
+
+grid: {
+	hoverable: true 
+}
+
+Options
+-------
+
+tooltip: boolean //default false, set to true to turn on this plugin
+tooltipOpts: {
+	xValText: string //default 'X: ', you can change text displayed on tooltip related to X value of hovered item
+	yValText: string //default 'Y: ', the same as above but regarding Y value
+}
