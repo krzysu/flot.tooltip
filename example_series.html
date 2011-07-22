@@ -9,10 +9,10 @@
 	<meta name="author" content="@krzysu, myviews.pl">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
     <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
 	<script src="js/jquery.flot.min.js"></script>
-	<script src="js/jquery.flot.tooltip_0.2.js"></script>
+	<script src="js/jquery.flot.tooltip.js"></script>
 	
 	<style type="text/css">
 		body {font-family: sans-serif; font-size: 16px; margin: 50px; max-width: 800px;}
@@ -28,25 +28,20 @@
 	<script>
 	$(function () {
 
-		//var data = [[3, 3], [4, 9], [5, 15], [6, 8], [7, 5], [8, 13], [9, 11], [10, 4], [11, 6], [12, 6], [13, 6], [14, 6], [15, 8] ];
-		var data = [[1304301600*1000, 20], [1304388000*1000, 30], [1304474400*1000, 40], [1304553600*1000, 10], [1304640000*1000, 23], [1304726400*1000, 16] ]; 
+		var data = [[3, 3], [4, 9], [5, 15], [6, 8], [7, 5], [8, 13], [9, 11], [10, 4], [11, 6], [12, 6], [13, 6], [14, 6], [15, 8] ];
+		//var data = [[1304301600*1000, 20], [1304388000*1000, 30], [1304474400*1000, 40], [1304553600*1000, 10], [1304640000*1000, 23], [1304726400*1000, 16] ]; 
 
 		var options = {
 			colors: ["#111"],
 			tooltip: true,
 			tooltipOpts: {
-				xValText: 'X value: ',
-				yValText: 'Y value: ',
-				dateFormat: "%y-%0m-%0d %H:%M:%S",
-				shifts: {
-					x: -55,
-					y: 25
-				}
+				xValText: 'CustomX: ',
+				yValText: 'CustomY: '
 			},
 			xaxis: {
-				mode: "time",
-				timeformat: "%y-%0m-%0d",
-				minTickSize: [1, "day"],
+				//mode: "time",
+				//timeformat: "%y-%0m-%0d",
+				//minTickSize: [1, "day"],
 			},
 			grid: {
 				backgroundColor: { colors: ["#fff", "#fff"] },
@@ -61,8 +56,8 @@
 				lineWidth: 1,
 				fill: true,
 				fillColor: { colors: [ { opacity: 0.8 }, { opacity: 0.6 } ] },
-				barWidth: 50000*1000,
-				//barWidth: 0.8,
+				//barWidth: 50000*1000,
+				barWidth: 0.8,
 				align: 'center',
 				horizontal: false
 			}	
