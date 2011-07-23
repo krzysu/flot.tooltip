@@ -53,7 +53,6 @@
 		
 		plot.hooks.bindEvents.push(function (plot, eventHolder) {
             
-			var opts = plot.getOptions();
 			var to = opts.tooltipOpts;
 			
 			if (opts.tooltip === false) {
@@ -67,12 +66,16 @@
 			$(placeholder).bind("plothover", function (event, pos, item) {
 				if (item) {
 					var tipText = '';
+					
+					if( typeof(item.series.label) !== 'undefined' && to.series === true ) {
+						tipText = item.series.label + ": ";
+					}
 
 					if(opts.xaxis.mode === "time") {
-						tipText = to.xValText + timestampToDate(item.datapoint[0]) + " " + to.yValText + item.datapoint[1];
+						tipText += to.xValText + timestampToDate(item.datapoint[0]) + " " + to.yValText + item.datapoint[1];
 					}
 					else {
-						tipText = to.xValText + item.datapoint[0] + " " + to.yValText + item.datapoint[1];		
+						tipText += to.xValText + item.datapoint[0] + " " + to.yValText + item.datapoint[1];		
 					}
 					
 					$tip.text( tipText ).css({left: tipPosition.x + to.shifts.x, top: tipPosition.y + to.shifts.y}).show();
