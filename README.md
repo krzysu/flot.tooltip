@@ -25,21 +25,30 @@ You need to set hoverable to true if you want this tooltip plugin to work.
 		hoverable: true 
 	}
 
-Options
+Plugin Options
 -------
+In comments there are default values
 
-	tooltip: 			boolean 		//default `false`, set to `true` to turn on this plugin
+	tooltip: 			boolean 		//false
 	tooltipOpts: {
-		xValText: 		string 			//default `X: `, you can change text displayed on tooltip related to X value of hovered item
-		yValText: 		string 			//default `Y: `, the same as above but regarding Y value
-		series:			boolean 		//show series name in tooltip (if exists)? default `true`
-		dateFormat: 	formatstring 	//default: `%y-%0m-%0d` but you can use the same specifiers as in Flot, for time mode data
-		shifts: { 						//shift tooltip position regarding mouse pointer, negative values are ok
-			x: 			int
-			y: 			int
+		xValText: 		string 			//'X: '
+		yValText: 		string 			//'Y: '
+		series:			boolean 		//true
+		dateFormat: 	formatstring 	//'%y-%0m-%0d'
+		shifts: { 
+			x: 			int				//25
+			y: 			int				//25
 		}
 	}
 	
+`tooltip` : set to `true` to turn on this plugin
+`xValText` : you can change text displayed on tooltip related to X value of hovered item
+`yValText` : the same as above but regarding Y value
+`series` : determine if name of series should be displayed in tooltip (if label exists)
+`dateFormat` : you can use the same specifiers as in Flot, for time mode data
+`shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
+	
 * * *
 Copyright (c) 2011 Krzysztof Urbas (@krzysu).
+
 jquery.flot.tooltip is available under the MIT license.
