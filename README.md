@@ -4,7 +4,6 @@ jquery.flot.tooltip
 
 Check http://code.google.com/p/flot/ for Flot details.
 
-This is version 0.2 so it may have some issues. It was not fully tested.
 Works also with Time series data and supports Date formatting in the same way as Flot itself.
 Flot Tooltip can be easily customized with CSS. Just do what you want with `#flotTip` in your stylesheet.
 
