@@ -13,6 +13,7 @@ See the `example.html` and `example_series.html` files and source code of plugin
 Changelog
 ---------
 What's new in 0.2?
+
 -   many series support with series name on the tooltip
 -   date and time formatting can be defined when in time mode (using internal plot function)
 -   tooltip position shift can be defined
@@ -40,13 +41,14 @@ In comments there are default values
 			y: 			int				//25
 		}
 	}
+
 	
-`tooltip` : set to `true` to turn on this plugin
-`xValText` : you can change text displayed on tooltip related to X value of hovered item
-`yValText` : the same as above but regarding Y value
-`series` : determine if name of series should be displayed in tooltip (if label exists)
-`dateFormat` : you can use the same specifiers as in Flot, for time mode data
-`shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
+-   `tooltip` : set to `true` to turn on this plugin
+-   `xValText` : you can change text displayed on tooltip related to X value of hovered item
+-   `yValText` : the same as above but regarding Y value
+-   `series` : determine if name of series should be displayed in tooltip (if label exists)
+-   `dateFormat` : you can use the same specifiers as in Flot, for time mode data
+-   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 	
 * * *
 Copyright (c) 2011 Krzysztof Urbas (@krzysu).
