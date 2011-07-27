@@ -29,8 +29,6 @@ Also minified version is available.
 #### Examples: ####
 
 	content: "value of X is %x and value of Y is %y and they belong to %s series"
-	
-	
 	content: "<h4>%s</h4><ul><li>X is %x</li><li>Y is %y</li></ul>"
 
 ### v0.2 ###
@@ -54,7 +52,7 @@ In comments there are default values
 	tooltip: 			boolean 		//false
 	tooltipOpts: {
 		content:		string			//"%s | X: %x | Y: %y"
-		dateFormat: 	formatstring 	//"%y-%0m-%0d"
+		dateFormat: 	string		 	//"%y-%0m-%0d"
 		shifts: { 
 			x: 			int				//25
 			y: 			int				//25
@@ -63,7 +61,7 @@ In comments there are default values
 
 	
 -   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
--	`content` : content of your tooltip, HTML tags are also allowed; use %s as series label, %x as X value, %y as Y value
+-	`content` : content of your tooltip, HTML tags are also allowed; use `%s` as series label, `%x` as X value, `%y` as Y value
 -   `dateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 
