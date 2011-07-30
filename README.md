@@ -1,24 +1,23 @@
-jquery.flot.tooltip
-===================
-#### tooltip plugin for wonderful Flot plotting library ####
+# jquery.flot.tooltip #
+__tooltip plugin for wonderful Flot plotting library__
 
 Check http://code.google.com/p/flot/ for Flot details.
 
 Works also with Time series data and supports Date formatting in the same way as Flot itself.
-You can fully define content of tip and you can use HTML tags too.
+You can fully define content of tip (with values precision) and you can use HTML tags too.
 Flot Tooltip can be easily customized with CSS. Just do what you want with `#flotTip` in your stylesheet.
 
 See the `example.html` and `example_series.html` files and source code of plugin for details of how to use it.
 
-Changelog
----------
+## Changelog ##
+
 ### What's new in v0.4? ###
 
-Now you can easily set precision of values displayed on tip thanks to enhanced 'string formatter'.
+Now you can easily set precision of values displayed on tip thanks to enhanced _string formatter_.
 Just put your desired precision after value in format like this `%x.precision`, 
-where 'precision; is a number of digits to appear after the decimal point. It uses `number.toFixed(precision)` function internally.
+where _precision_ is a number of digits to appear after the decimal point. It uses `number.toFixed(precision)` function internally.
 
-What is more 'string formatter' was rewritten and now is RegExp based.
+What is more _string formatter_ was rewritten and now is RegExp based.
 
 #### Examples: ####
 
@@ -27,7 +26,7 @@ What is more 'string formatter' was rewritten and now is RegExp based.
 
 ### v0.3 ###
 
-I'd like to introduce 'string formatter'. Now you can easily define how content of your flot.tooltip should look like.
+I'd like to introduce _string formatter_. Now you can easily define how content of your flot.tooltip should look like.
 You can also use HTML tags!
 
 Just use new option called `content`. The following specifiers are supported:
@@ -36,7 +35,7 @@ Just use new option called `content`. The following specifiers are supported:
 -   `%y`: for Y value
 -   `%s`: for series label
 
-Also minified version is available.
+From now on also minified version is available.
 
 ### v0.2 ###
 
@@ -44,16 +43,16 @@ Also minified version is available.
 -   date and time formatting can be defined when in time mode (using internal plot function)
 -   tooltip position shift can be defined
 
-Important!
-----------
+## Important! ##
+
 You need to set hoverable to true if you want this tooltip plugin to work.
 
 	grid: {
 		hoverable: true 
 	}
 
-Plugin Options (v0.4)
--------
+## Plugin Options (v0.4) ##
+
 In comments there are default values
 
 	tooltip: 			boolean 		//false
@@ -82,4 +81,4 @@ Depreciated in v0.3:
 * * *
 Copyright (c) 2011 Krzysztof Urbas (@krzysu).
 
-jquery.flot.tooltip is available under the MIT license.
+__jquery.flot.tooltip__ is available under the MIT license.
