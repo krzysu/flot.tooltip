@@ -11,7 +11,11 @@ See the `example.html` and `example_series.html` files and source code of plugin
 
 ## Changelog ##
 
-### What's new in v0.4? ###
+### What's new in v0.4.1? ###
+
+-	default theme with new option to disable it if you like to add your own styles
+
+### v0.4 ###
 
 Now you can easily set precision of values displayed on tip thanks to enhanced _string formatter_.
 Just put your desired precision after value in format like this `%x.precision`, 
@@ -51,7 +55,7 @@ You need to set hoverable to true if you want this tooltip plugin to work.
 		hoverable: true 
 	}
 
-## Plugin Options (v0.4) ##
+## Plugin Options (v0.4.1) ##
 
 In comments there are default values
 
@@ -62,7 +66,8 @@ In comments there are default values
 		shifts: { 
 			x: 			int				//25
 			y: 			int				//25
-		}
+		},
+		defaultTheme:	boolean			//true
 	}
 
 	
@@ -71,6 +76,7 @@ In comments there are default values
 	With `%x` and `%y` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.
 -   `dateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
+-	`defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
 
 Depreciated in v0.3:
 
