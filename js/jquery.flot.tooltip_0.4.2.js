@@ -69,7 +69,6 @@
 				if(to.defaultTheme) {
 					$tip.css({
 						'background': '#fff',
-						'background': 'rgba(255, 255, 255, 0.9)',
 						'z-index': '100',
 						'padding': '0.4em 0.6em',
 						'border-radius': '0.5em',

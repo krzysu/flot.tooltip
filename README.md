@@ -62,7 +62,7 @@ You need to set hoverable to true if you want this tooltip plugin to work.
 		hoverable: true 
 	}
 
-## Plugin Options (v0.4.1) ##
+## Plugin Options (from v0.4.1) ##
 
 In comments there are default values
 
