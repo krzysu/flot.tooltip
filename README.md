@@ -11,7 +11,14 @@ See the `example.html` and `example_series.html` files and source code of plugin
 
 ## Changelog ##
 
-### What's new in v0.4.1? ###
+### What's new in v0.4.2? ###
+
+-	tooltip is appended to `body`, not `placeholder` of graph
+-	changed default values of tip's shifts
+-	time is formatted when first axis of flot's multi-axes is in time mode (issue #2) (full multi-axes support maybe in the future)
+-	`#flotTip` container is initialized only if it does not exist (see new multiple-axes example and re-initialize plot)
+
+### v0.4.1 ###
 
 -	default theme with new option to disable it if you like to add your own styles
 
@@ -64,8 +71,8 @@ In comments there are default values
 		content:		string			//"%s | X: %x | Y: %y.2"
 		dateFormat: 	string		 	//"%y-%0m-%0d"
 		shifts: { 
-			x: 			int				//25
-			y: 			int				//25
+			x: 			int				//10
+			y: 			int				//20
 		},
 		defaultTheme:	boolean			//true
 	}
