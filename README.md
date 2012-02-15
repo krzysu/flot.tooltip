@@ -11,7 +11,11 @@ See the `example.html` and `example_series.html` files and source code of plugin
 
 ## Changelog ##
 
-### What's new in v0.4.2? ###
+### What's new in v0.4.3? ###
+
+-	add jquery.flot.stack plugin support, values in tooltip are now displayed correctly (issue #3)
+
+### v0.4.2 ###
 
 -	tooltip is appended to `body`, not `placeholder` of graph
 -	changed default values of tip's shifts
