@@ -15,24 +15,24 @@ Check examples folder and source code of plugin for details of how to use it.
 __Important!__   
 You need to set hoverable to true if you want this tooltip plugin to work.
 
-  grid: {
-    hoverable: true 
-  }
+    grid: {
+      hoverable: true 
+    }
 
 ### Plugin Options (latest version)
 
 In comments there are default values  
 
-  tooltip:        boolean       //false
-  tooltipOpts: {
-    content:      string      //"%s | X: %x | Y: %y.2"
-    dateFormat:   string      //"%y-%0m-%0d"
-    shifts: { 
-      x:          int         //10
-      y:          int         //20
-    },
-    defaultTheme:  boolean     //true
-  }
+    tooltip:        boolean       //false
+    tooltipOpts: {
+      content:      string      //"%s | X: %x | Y: %y.2"
+      dateFormat:   string      //"%y-%0m-%0d"
+      shifts: { 
+        x:          int         //10
+        y:          int         //20
+      },
+      defaultTheme:  boolean     //true
+    }
 
 
 -   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
@@ -53,22 +53,22 @@ Depreciated in v0.3:
 
 ### What's new in v0.4.4?
 
-- add jquery.flot.pie plugin support, you can display percentage value on tooltip (thx to [ismyrnow](https://github.com/ismyrnow) for pull request)
+-   add jquery.flot.pie plugin support, you can display percentage value on tooltip (thx to [ismyrnow](https://github.com/ismyrnow) for pull request)
 
 ### v0.4.3
 
--	add jquery.flot.stack plugin support, values in tooltip are now displayed correctly (issue #3)
+-   add jquery.flot.stack plugin support, values in tooltip are now displayed correctly (issue #3)
 
 ### v0.4.2
 
--	tooltip is appended to `body`, not `placeholder` of graph
--	changed default values of tip's shifts
--	time is formatted when first axis of flot's multi-axes is in time mode (issue #2) (full multi-axes support maybe in the future)
--	`#flotTip` container is initialized only if it does not exist (see new multiple-axes example and re-initialize plot)
+-   tooltip is appended to `body`, not `placeholder` of graph
+-   changed default values of tip's shifts
+-   time is formatted when first axis of flot's multi-axes is in time mode (issue #2) (full multi-axes support maybe in the future)
+-   `#flotTip` container is initialized only if it does not exist (see new multiple-axes example and re-initialize plot)
 
 ### v0.4.1
 
--	default theme with new option to disable it if you like to add your own styles
+-   default theme with new option to disable it if you like to add your own styles
 
 ### v0.4
 
@@ -80,8 +80,8 @@ What is more _string formatter_ was rewritten and now is RegExp based.
 
 #### Examples:
 
-  content: "value of X is %x.1 and value of Y is %y.4 and they belong to '%s' series"
-  content: "<h4>%s</h4><ul><li>X is %x</li><li>Y is %y.2</li></ul>"
+    content: "value of X is %x.1 and value of Y is %y.4 and they belong to '%s' series"
+    content: "<h4>%s</h4><ul><li>X is %x</li><li>Y is %y.2</li></ul>"
 
 ### v0.3
 
