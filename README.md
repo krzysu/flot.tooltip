@@ -11,6 +11,10 @@ Check examples folder for details of how to use it.
 
 
 ## How to use
+Download and include on your page __after__ main jquery.flot library:
+
+-   [download uncompressed flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.js)
+-   [download minified flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.min.js)
 
 __Important!__ You need to set flot option `hoverable` to `true` if you want flot.tooltip plugin to work.
 
