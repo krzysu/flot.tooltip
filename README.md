@@ -7,13 +7,12 @@ Works also with Time series data and supports Date formatting in the same way as
 You can fully define content of tip (with values precision) and you can use HTML tags too.
 Flot Tooltip can be easily customized with CSS. Just do what you want with `#flotTip` in your stylesheet.
 
-Check examples folder and source code of plugin for details of how to use it.
+Check examples folder for details of how to use it.
 
 
 ## How to use
 
-__Important!__   
-You need to set hoverable to true if you want this tooltip plugin to work.
+__Important!__ You need to set flot option `hoverable` to `true` if you want flot.tooltip plugin to work.
 
     grid: {
       hoverable: true 
