@@ -11,7 +11,13 @@ See the `example.html` and `example_series.html` files and source code of plugin
 
 ## Changelog ##
 
-### What's new in v0.4.3? ###
+### What's new in v0.4.4? ###
+
+- added percentages to content option
+  - Example: `content: '%p.2%'` displays "20.25%"
+  - Especially useful with pie charts (using flot.pie plugin)
+
+### v0.4.3 ###
 
 -	add jquery.flot.stack plugin support, values in tooltip are now displayed correctly (issue #3)
 
