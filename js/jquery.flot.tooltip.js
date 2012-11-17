@@ -15,7 +15,7 @@
 	var options = {
 		tooltip: false, //boolean
 		tooltipOpts: {
-			content: "%s | X: %x | Y: %y.2", //%s -> series label, %x -> X value, %y -> Y value, %x.2 -> precision of X value, %p -> percent
+			content: "%s | X: %x | Y: %y.2 | Extra: %data[2]", //%s -> series label, %x -> X value, %y -> Y value, %x.2 -> precision of X value, %p -> percent, %data[2] -> raw data from third element of point (extra labels)
 			dateFormat: "%y-%0m-%0d",
 			shifts: {
 				x: 10,
@@ -106,6 +106,7 @@
 			var seriesPattern = /%s/;
 			var xPattern = /%x\.{0,1}(\d{0,})/;
 			var yPattern = /%y\.{0,1}(\d{0,})/;
+			var dataPattern = /%data\[(\d)\]/g;
 			
 			//percent match
 			if( typeof (item.series.percent) !== 'undefined' ) {
@@ -126,6 +127,9 @@
 			if( typeof item.series.data[item.dataIndex][1] === 'number' ) {
 				content = adjustValPrecision(yPattern, content, item.series.data[item.dataIndex][1]);
 			}
+			
+			// additional data fields
+            		content = content.replace(dataPattern, function(match, index) { return item.series.data[item.dataIndex][index] });
 
 			return content;
 		};
