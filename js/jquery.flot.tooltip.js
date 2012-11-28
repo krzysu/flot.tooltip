@@ -21,6 +21,7 @@
 				x: 10,
 				y: 20
 			},
+			onHover: null,
 			defaultTheme: true
 		}
 	};
@@ -89,6 +90,8 @@
 					else {
 						tipText = stringFormat(to.content, item);						
 					}
+					
+					if (opts.tooltipOpts.onHover) opts.tooltipOpts.onHover(item, $tip);
 					
 					$tip.html( tipText ).css({left: tipPosition.x + to.shifts.x, top: tipPosition.y + to.shifts.y}).show();
 				}
