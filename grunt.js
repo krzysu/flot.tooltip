@@ -6,13 +6,14 @@ module.exports = function(grunt) {
 
     lint: {
       files: [
-        'grunt.js'
+        'grunt.js',
+        'js/jquery.flot.tooltip.source.js'
       ]
     },
 
     pkg: {
       name: 'jquery.flot.tooltip',
-      version: '0.4.4',
+      version: '0.5 alpha',
       author: 'Krzysztof Urbas @krzysu [myviews.pl]',
       description: 'easy-to-use tooltips for Flot charts',
       license: 'MIT',
