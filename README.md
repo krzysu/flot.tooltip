@@ -1,7 +1,7 @@
 # jquery.flot.tooltip
 __tooltip plugin for wonderful Flot plotting library__
 
-Check http://code.google.com/p/flot/ for Flot details.
+Check [Flot homepage](http://www.flotcharts.org/) for details.
 
 Works also with Time series data and supports Date formatting in the same way as Flot itself.
 You can fully define content of tip (with values precision) and you can use HTML tags too.
