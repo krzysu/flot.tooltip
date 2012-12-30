@@ -12,7 +12,7 @@
 	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
     <!--[if lte IE 8]><script src="../js/excanvas.min.js"></script><![endif]-->
 	<script src="../js/jquery.flot.js"></script>
-	<script src="../js/jquery.flot.tooltip.min.js"></script>
+	<script src="../js/jquery.flot.tooltip.js"></script>
 	
 	<style type="text/css">
 		body {font-family: sans-serif; font-size: 16px; margin: 50px; max-width: 800px;}
@@ -55,8 +55,12 @@ $(function () {
 				},
 				tooltip: true,
 				tooltipOpts: {
-					content: "%s for %x was %y€",
-					dateFormat: "%y-%0m-%0d"
+					content: "%s for %x was %y",
+					xDateFormat: "%y-%0m-%0d",
+          
+          onHover: function(flotItem, $tooltipEl) {
+            // console.log(flotItem, $tooltipEl);
+          } 
 				}
 
            });

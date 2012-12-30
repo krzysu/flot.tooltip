@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 
     pkg: {
       name: 'jquery.flot.tooltip',
-      version: '0.5 alpha',
+      version: '0.5',
       author: 'Krzysztof Urbas @krzysu [myviews.pl]',
       description: 'easy-to-use tooltips for Flot charts',
       license: 'MIT',
@@ -45,6 +45,13 @@ module.exports = function(grunt) {
       main: {
         src: ['<banner>', 'js/jquery.flot.tooltip.source.js'],
         dest: 'js/jquery.flot.tooltip.min.js'
+      }
+    },
+
+    watch: { // for development run 'grunt watch'
+      main: {
+        files: 'js/*.source.js',
+        tasks: 'lint concat:main min:main'
       }
     }
   });

@@ -1,13 +1,13 @@
 # jquery.flot.tooltip
 __tooltip plugin for wonderful Flot plotting library__
 
-Check [Flot homepage](http://www.flotcharts.org/) for details.
+For information about Flot library [go here](http://www.flotcharts.org/).
 
 Works also with Time series data and supports Date formatting in the same way as Flot itself.
 You can fully define content of tip (with values precision) and you can use HTML tags too.
 Flot Tooltip can be easily customized with CSS. Just do what you want with `#flotTip` in your stylesheet.
 
-Check examples folder for details of how to use it.
+Check `examples` folder for details of how to use it.
 
 
 ## How to use
@@ -26,24 +26,30 @@ __Important!__ You need to set flot option `hoverable` to `true` if you want flo
 
 In comments there are default values  
 
-    tooltip:        boolean       //false
+    tooltip:            boolean     //false
     tooltipOpts: {
-      content:      string      //"%s | X: %x | Y: %y.2"
-      dateFormat:   string      //"%y-%0m-%0d"
-      shifts: { 
-        x:          int         //10
-        y:          int         //20
-      },
-      defaultTheme:  boolean     //true
+        content:        string      //"%s | X: %x | Y: %y"
+        xDateFormat:    string      //null
+        yDateFormat:    string      //null
+        shifts: { 
+            x:          int         //10
+            y:          int         //20
+        },
+        defaultTheme:   boolean     //true
     }
 
 
 -   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
-	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.
--   `dateFormat` : you can use the same specifiers as in Flot, for time mode data
+	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
+  If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip. 
+-   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
+-   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
+
+Depreciated in v0.5:
+-   `dateFormat`
 
 Depreciated in v0.3:
 
@@ -51,10 +57,22 @@ Depreciated in v0.3:
 -   `yValText` : the same as above but regarding Y value
 -   `series` : determine if name of series should be displayed in tooltip (if label exists)
 
+## For developers/contributors
+
+In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. During development you should work with `js/jquery.flot.tooltip.source.js` file. You can have `grunt watch` running or run `grunt build` every time you want.
 
 ## Changelog
 
-### What's new in v0.4.4?
+### What's new in v0.5?
+
+-   refactoring + fixed few issues (#7 and #11)
+-   `dateFormat` option replaced with `xDateFormat` and `yDateFormat` to support both axes
+-   changed string formatter logic:
+    -   if any axis has `mode == time` then format value according to axis date format (if defined) or tick format
+    -   if value has set precision, use it
+    -   in the end use tick formatter for the axis
+
+### v0.4.4
 
 -   add jquery.flot.pie plugin support, you can display percentage value on tooltip (thx to [ismyrnow](https://github.com/ismyrnow) for pull request)
 

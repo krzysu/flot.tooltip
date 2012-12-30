@@ -6,13 +6,23 @@
         defaultOptions: {
             tooltip: false,
             tooltipOpts: {
-                content: "%s | X: %x | Y: %y.2", //%s -> series label, %x -> X value, %y -> Y value, %x.2 -> precision of X value, %p -> percent
-                dateFormat: "%y-%0m-%0d",
+                content: "%s | X: %x | Y: %y",
+                // allowed templates are:
+                // %s -> series label,
+                // %x -> X value,
+                // %y -> Y value,
+                // %x.2 -> precision of X value,
+                // %p -> percent
+                xDateFormat: null,
+                yDateFormat: null,
                 shifts: {
                     x: 10,
                     y: 20
                 },
-                defaultTheme: true
+                defaultTheme: true,
+
+                // callbacks
+                onHover: function(flotItem, $tooltipEl) {}
             }
         },
 
@@ -42,14 +52,9 @@
                 $( plot.getPlaceholder() ).bind("plothover", function (event, pos, item) {
                     if (item) {                    
                         var tipText;
-                        var content = that.tooltipOptions.content;
-
-                        if(that.plotOptions.xaxis.mode === "time" || that.plotOptions.xaxes[0].mode === "time") {
-                            tipText = that.stringFormat(content, item, that.timestampToDate);
-                        }
-                        else {
-                            tipText = that.stringFormat(content, item);                        
-                        }
+                        
+                        // convert tooltip content template to real tipText
+                        tipText = that.stringFormat(that.tooltipOptions.content, item);
                         
                         $tip.html( tipText )
                             .css({
@@ -57,6 +62,11 @@
                                 top: that.tipPosition.y + that.tooltipOptions.shifts.y
                             })
                             .show();
+                    
+                        // run callback
+                        if(typeof that.tooltipOptions.onHover === 'function') {
+                            that.tooltipOptions.onHover(item, $tip);
+                        }
                     }
                     else {
                         $tip.hide().html('');
@@ -96,11 +106,9 @@
             return $tip;
         },
 
-        updateTooltipPosition: function(pos) {
-            this.tipPosition.x = pos.x;
-            this.tipPosition.y = pos.y;
-        },
-        
+        /**
+         * watch mouse position and update tooltip position
+         */
         onMouseMove: function(e) {
                         
             var pos = {x: 0, y: 0};
@@ -110,44 +118,83 @@
 
             FlotTooltip.updateTooltipPosition(pos);
         },
-        
-        timestampToDate: function(tmst) {
 
-            var theDate = new Date(tmst);
-            
-            return $.plot.formatDate(theDate, FlotTooltip.tooltipOptions.dateFormat);
+        updateTooltipPosition: function(pos) {
+            this.tipPosition.x = pos.x;
+            this.tipPosition.y = pos.y;
         },
         
-        stringFormat: function(content, item, fnct) {
+        /**
+         * core function, create tooltip content
+         * @param  {string} content - template with tooltip content
+         * @param  {object} item - Flot item
+         * @return {string} real tooltip content for current item
+         */
+        stringFormat: function(content, item) {
         
             var percentPattern = /%p\.{0,1}(\d{0,})/;
             var seriesPattern = /%s/;
             var xPattern = /%x\.{0,1}(\d{0,})/;
             var yPattern = /%y\.{0,1}(\d{0,})/;
-            
-            //percent match
+
+            // percent match for pie charts
             if( typeof (item.series.percent) !== 'undefined' ) {
                 content = this.adjustValPrecision(percentPattern, content, item.series.percent);
             }
-            //series match
+            
+            // series match
             if( typeof(item.series.label) !== 'undefined' ) {
                 content = content.replace(seriesPattern, item.series.label);
             }
-            // xVal match
-            if( typeof(fnct) === 'function' ) {
-                content = content.replace(xPattern, fnct(item.series.data[item.dataIndex][0]) );
+
+            // time mode axes with custom dateFormat
+            if(this.isTimeMode('xaxis', item) && this.isXDateFormat(item)) {
+                content = content.replace(xPattern, this.timestampToDate(item.series.data[item.dataIndex][0], this.tooltipOptions.xDateFormat));
             }
-            else if( typeof item.series.data[item.dataIndex][0] === 'number' ) {
+
+            if(this.isTimeMode('yaxis', item) && this.isYDateFormat(item)) {
+                content = content.replace(yPattern, this.timestampToDate(item.series.data[item.dataIndex][1], this.tooltipOptions.yDateFormat));
+            }
+
+            // set precision if defined
+            if( typeof item.series.data[item.dataIndex][0] === 'number' ) {
                 content = this.adjustValPrecision(xPattern, content, item.series.data[item.dataIndex][0]);
             }
-            // yVal match
             if( typeof item.series.data[item.dataIndex][1] === 'number' ) {
                 content = this.adjustValPrecision(yPattern, content, item.series.data[item.dataIndex][1]);
             }
 
+            // if no value customization, use tickFormatter by default
+            if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
+                content = content.replace(xPattern, item.series.xaxis.tickFormatter(item.series.data[item.dataIndex][0], item.series.xaxis));
+            }
+            if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
+                content = content.replace(yPattern, item.series.yaxis.tickFormatter(item.series.data[item.dataIndex][1], item.series.yaxis));
+            }
+
             return content;
         },
+
+        // helpers just for readability
+        isTimeMode: function(axisName, item) {
+            return (typeof item.series[axisName].options.mode !== 'undefined' && item.series[axisName].options.mode === 'time');
+        },
+
+        isXDateFormat: function(item) {
+            return (typeof this.tooltipOptions.xDateFormat !== 'undefined' && this.tooltipOptions.xDateFormat !== null);
+        },
+
+        isYDateFormat: function(item) {
+            return (typeof this.tooltipOptions.yDateFormat !== 'undefined' && this.tooltipOptions.yDateFormat !== null);
+        },
+
+        // 
+        timestampToDate: function(tmst, dateFormat) {
+            var theDate = new Date(tmst);
+            return $.plot.formatDate(theDate, dateFormat);
+        },
         
+        // 
         adjustValPrecision: function(pattern, content, value) {
         
             var precision;
@@ -155,8 +202,10 @@
                 if(RegExp.$1 !== '') {
                     precision = RegExp.$1;
                     value = value.toFixed(precision);
+
+                    // only replace content if precision exists
+                    content = content.replace(pattern, value);
                 }
-                content = content.replace(pattern, value);
             }
         
             return content;
