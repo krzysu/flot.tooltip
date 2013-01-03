@@ -137,6 +137,11 @@
             var xPattern = /%x\.{0,1}(\d{0,})/;
             var yPattern = /%y\.{0,1}(\d{0,})/;
 
+            // if it is a function callback get the content string
+            if( typeof(content) === 'function' ) {
+                content = content(item.series.data[item.dataIndex][0], item.series.data[item.dataIndex][1]);
+            }
+
             // percent match for pie charts
             if( typeof (item.series.percent) !== 'undefined' ) {
                 content = this.adjustValPrecision(percentPattern, content, item.series.percent);
