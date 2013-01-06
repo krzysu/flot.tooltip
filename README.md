@@ -64,7 +64,12 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.5.1?
+### What's new in v0.6?
+
+-   nothing from user perspective :) 
+-   another refactoring, `FlotTooltip` object structure changed to allow many instances to fix issue #13 (regression after v0.5 refactoring)
+
+### v0.5.1
 
 -   `content` can be a function (thx to [@fmsf](https://github.com/fmsf) for pull request)
 
