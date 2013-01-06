@@ -42,7 +42,7 @@ In comments there are default values
 -   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
 	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
-  If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.
+  If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
   If you require even more control over how the tooltip is generated you can pass a callback `function(xval, yval)` that must return a string with the format described. 
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
@@ -64,7 +64,11 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.5?
+### What's new in v0.5.1?
+
+-   `content` can be a function (thx to [@fmsf](https://github.com/fmsf) for pull request)
+
+### v0.5
 
 -   refactoring + fixed few issues (#7 and #11)
 -   `dateFormat` option replaced with `xDateFormat` and `yDateFormat` to support both axes
@@ -75,7 +79,7 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ### v0.4.4
 
--   add jquery.flot.pie plugin support, you can display percentage value on tooltip (thx to [ismyrnow](https://github.com/ismyrnow) for pull request)
+-   add jquery.flot.pie plugin support, you can display percentage value on tooltip (thx to [@ismyrnow](https://github.com/ismyrnow) for pull request)
 
 ### v0.4.3
 
