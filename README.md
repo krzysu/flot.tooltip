@@ -26,16 +26,16 @@ __Important!__ You need to set flot option `hoverable` to `true` if you want flo
 
 In comments there are default values  
 
-    tooltip:            boolean     //false
+    tooltip:            boolean                 //false
     tooltipOpts: {
-        content:        string      //"%s | X: %x | Y: %y"
-        xDateFormat:    string      //null
-        yDateFormat:    string      //null
+        content:        string or function      //"%s | X: %x | Y: %y"
+        xDateFormat:    string                  //null
+        yDateFormat:    string                  //null
         shifts: { 
-            x:          int         //10
-            y:          int         //20
+            x:          int                     //10
+            y:          int                     //20
         },
-        defaultTheme:   boolean     //true
+        defaultTheme:   boolean                 //true
     }
 
 

@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2012-12-30
+ * build on 2013-01-06
  * released under MIT License, 2012
 */
 
