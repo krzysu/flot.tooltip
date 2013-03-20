@@ -215,7 +215,7 @@
 
     //
     var init = function(plot) {
-
+      new FlotTooltip(plot);
     };
 
     // define Flot plugin
