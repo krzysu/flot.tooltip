@@ -212,13 +212,10 @@
     
         return content;
     };
-    
-    // to have controll over existing instances
-    var tooltipsCollection = [];
 
-    // 
+    //
     var init = function(plot) {
-        tooltipsCollection.push( new FlotTooltip(plot) );
+      new FlotTooltip(plot);
     };
 
     // define Flot plugin
@@ -226,7 +223,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6'
+        version: '0.6.1'
     });
 
 })(jQuery);
