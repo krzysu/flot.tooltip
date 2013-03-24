@@ -1,15 +1,3 @@
-/*
- * jquery.flot.tooltip
- * 
- * description: easy-to-use tooltips for Flot charts
- * version: 0.6
- * author: Krzysztof Urbas @krzysu [myviews.pl]
- * website: https://github.com/krzysu/flot.tooltip
- * 
- * build on 2013-01-07
- * released under MIT License, 2012
-*/
-
 (function ($) {
 
     // plugin options, default values
@@ -224,13 +212,10 @@
     
         return content;
     };
-    
-    // to have controll over existing instances
-    var tooltipsCollection = [];
 
-    // 
+    //
     var init = function(plot) {
-        tooltipsCollection.push( new FlotTooltip(plot) );
+      new FlotTooltip(plot);
     };
 
     // define Flot plugin
@@ -238,7 +223,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6'
+        version: '0.6.1'
     });
 
 })(jQuery);
