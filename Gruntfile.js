@@ -8,6 +8,8 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
+
     jshint: {
       files: [
         'Gruntfile.js',
@@ -15,17 +17,9 @@ module.exports = function(grunt) {
       ]
     },
 
-    pkg: {
-      name: 'jquery.flot.tooltip',
-      version: '0.6',
-      author: 'Krzysztof Urbas @krzysu [myviews.pl]',
-      description: 'easy-to-use tooltips for Flot charts',
-      license: 'MIT',
-      website: 'https://github.com/krzysu/flot.tooltip'
-    },
-
-    meta: {
-      banner: '/*\n' +
+    concat: {
+      options: {
+        banner: '/*\n' +
         ' * <%= pkg.name %>\n' +
         ' * \n' +
         ' * description: <%= pkg.description %>\n' +
@@ -35,19 +29,20 @@ module.exports = function(grunt) {
         ' * \n' +
         ' * build on <%= grunt.template.today("yyyy-mm-dd") %>\n' +
         ' * released under <%= pkg.license %> License, 2012\n' +
-        '*/'
-    },
-
-    concat: {
+        '*/ \n'
+      },
       main: {
-        src: ['<banner>', 'js/jquery.flot.tooltip.source.js'],
+        src: ['js/jquery.flot.tooltip.source.js'],
         dest: 'js/jquery.flot.tooltip.js'
       }
     },
 
     uglify: {
+      options: {
+        banner: '<%= concat.options.banner %>'
+      },
       main: {
-        src: ['<banner>', 'js/jquery.flot.tooltip.source.js'],
+        src: ['js/jquery.flot.tooltip.source.js'],
         dest: 'js/jquery.flot.tooltip.min.js'
       }
     },

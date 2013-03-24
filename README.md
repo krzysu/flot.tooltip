@@ -36,6 +36,7 @@ In comments there are default values
             y:          int                     //20
         },
         defaultTheme:   boolean                 //true
+        onHover:        function(flotItem, $tooltipEl)
     }
 
 
@@ -48,6 +49,7 @@ In comments there are default values
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
+-   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered serie
 
 Depreciated in v0.5:
 -   `dateFormat`
@@ -64,7 +66,7 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6?
+### What's new in v0.6 or v0.6.1?
 
 -   nothing from user perspective :) 
 -   another refactoring, `FlotTooltip` object structure changed to allow many instances to fix issue #13 (regression after v0.5 refactoring)
@@ -134,6 +136,11 @@ From now on also minified version is available.
 -   tooltip position shift can be defined
 
 
+## Contributors
+
+-   [@ismyrnow](https://github.com/ismyrnow) - add jquery.flot.pie plugin support
+-   [@fmsf](https://github.com/fmsf) - `content` can be a function
+-   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
 
 
 * * *

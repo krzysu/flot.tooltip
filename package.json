@@ -1,8 +1,8 @@
 {
-  "name": "flot.tooltip",
+  "name": "jquery.flot.tooltip",
   "version": "0.6.1",
-  "description": "Tooltip plugin for wonderful Flot plotting library",
-  "main": " ",
+  "description": "easy-to-use tooltips for Flot charts",
+  "website": "https://github.com/krzysu/flot.tooltip",
   "directories": {
     "example": "examples"
   },
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pdelanauze/flot.tooltip.git"
+    "url": "https://github.com/krzysu/flot.tooltip"
   },
   "keywords": [
     "flot",
@@ -28,7 +28,7 @@
     "js",
     "grunt"
   ],
-  "author": "Krzysztof Urbas",
+  "author": "Krzysztof Urbas @krzysu [myviews.pl]",
   "license": "MIT",
   "readmeFilename": "README.md"
 }
