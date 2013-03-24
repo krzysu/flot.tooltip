@@ -144,6 +144,6 @@ From now on also minified version is available.
 
 
 * * *
-Copyright (c) 2011 Krzysztof Urbas (@krzysu).
+Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).
 
 __jquery.flot.tooltip__ is available under the MIT license.
