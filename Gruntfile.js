@@ -1,12 +1,16 @@
-
 module.exports = function(grunt) {
+
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Project configuration
   grunt.initConfig({
 
-    lint: {
+    jshint: {
       files: [
-        'grunt.js',
+        'Gruntfile.js',
         'js/jquery.flot.tooltip.source.js'
       ]
     },
@@ -41,7 +45,7 @@ module.exports = function(grunt) {
       }
     },
 
-    min: {
+    uglify: {
       main: {
         src: ['<banner>', 'js/jquery.flot.tooltip.source.js'],
         dest: 'js/jquery.flot.tooltip.min.js'
@@ -51,12 +55,12 @@ module.exports = function(grunt) {
     watch: { // for development run 'grunt watch'
       main: {
         files: 'js/*.source.js',
-        tasks: 'lint concat:main min:main'
+        tasks: ['lint','concat:main','uglify:main']
       }
     }
   });
 
   // Default task
-  grunt.registerTask('build', 'lint concat:main min:main');
+  grunt.registerTask('build', ['jshint', 'concat:main', 'uglify:main']);
 
 };
