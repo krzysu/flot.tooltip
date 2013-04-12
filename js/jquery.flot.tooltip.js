@@ -65,6 +65,8 @@
             
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", function (event, pos, item) {
+                that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
+                
                 if (item) {                    
                     var tipText;
                     
