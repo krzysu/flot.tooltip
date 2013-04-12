@@ -141,6 +141,7 @@ From now on also minified version is available.
 -   [@ismyrnow](https://github.com/ismyrnow) - add jquery.flot.pie plugin support
 -   [@fmsf](https://github.com/fmsf) - `content` can be a function
 -   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
+-   [@grrowl](https://github.com/grrowl) - fix tooltip position for touch devices
 
 
 * * *
