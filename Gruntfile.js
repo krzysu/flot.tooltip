@@ -4,6 +4,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Project configuration
   grunt.initConfig({
@@ -44,6 +45,16 @@ module.exports = function(grunt) {
       main: {
         src: ['js/jquery.flot.tooltip.source.js'],
         dest: 'js/jquery.flot.tooltip.min.js'
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: '.',
+          hostname: '*'
+        }
       }
     },
 
