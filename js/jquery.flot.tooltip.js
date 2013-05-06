@@ -205,7 +205,7 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-        var theDate = new Date(tmst);
+        var theDate = new $.plot.dateGenerator(tmst, this.plotOptions);
         return $.plot.formatDate(theDate, dateFormat);
     };
 
