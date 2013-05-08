@@ -120,7 +120,9 @@
                     'padding': '0.4em 0.6em',
                     'border-radius': '0.5em',
                     'font-size': '0.8em',
-                    'border': '1px solid #111'
+                    'border': '1px solid #111',
+                    'display': 'inline-block',
+                    'white-space': 'nowrap'
                 });
             }
         }
@@ -130,6 +132,9 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
+        if (pos.x > ($(document).width() - 2 * $("#flotTip").width() - this.tooltipOptions.shifts.x)) {
+                pos.x -= ($("#flotTip").width() + 2 * this.tooltipOptions.shifts.x);
+        }
         this.tipPosition.x = pos.x;
         this.tipPosition.y = pos.y;
     };
@@ -205,7 +210,7 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-        var theDate = new Date(tmst);
+        var theDate = new $.plot.dateGenerator(tmst, this.plotOptions);
         return $.plot.formatDate(theDate, dateFormat);
     };
 
