@@ -60,9 +60,9 @@
                     // convert tooltip content template to real tipText
                     tipText = that.stringFormat(that.tooltipOptions.content, item);
 
+                    $tip.html( tipText );
                     that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
-                    $tip.html( tipText )
-                        .css({
+                    $tip.css({
                             left: that.tipPosition.x + that.tooltipOptions.shifts.x,
                             top: that.tipPosition.y + that.tooltipOptions.shifts.y
                         })
@@ -120,8 +120,8 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var totalTipWidth = $("#flotTip").width() + 3 * this.tooltipOptions.shifts.x;
-        var totalTipHeight = $("#flotTip").height() + 2 * this.tooltipOptions.shifts.y;
+        var totalTipWidth = $("#flotTip").outerWidth() + this.tooltipOptions.shifts.x;
+        var totalTipHeight = $("#flotTip").outerHeight() + this.tooltipOptions.shifts.y;
         if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
