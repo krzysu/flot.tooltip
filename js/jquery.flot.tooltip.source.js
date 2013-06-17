@@ -140,10 +140,10 @@
      */
     FlotTooltip.prototype.stringFormat = function(content, item) {
 
-        var percentPattern = /%p\.{0,1}(\d{0,})/;
+        var percentPattern = /%p\.{0,1}(?:\d{0,})/;
         var seriesPattern = /%s/;
-        var xPattern = /%x\.{0,1}(\d{0,})/;
-        var yPattern = /%y\.{0,1}(\d{0,})/;
+        var xPattern = /%x\.{0,1}(?:\d{0,})/;
+        var yPattern = /%y\.{0,1}(?:\d{0,})/;
 
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
@@ -217,10 +217,7 @@
                 precision = RegExp.$1;
                 value = value.toFixed(precision);
 
-                // only replace content if precision exists
-                content = content.replace(pattern, value);
-            }
-            else {
+                // only replace content if precision exists, in other case use thickformater
                 content = content.replace(pattern, value);
             }
         }
