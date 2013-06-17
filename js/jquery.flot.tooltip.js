@@ -222,12 +222,16 @@
     FlotTooltip.prototype.adjustValPrecision = function(pattern, content, value) {
 
         var precision;
-        if( content.match(pattern) !== null ) {
+        var matchResult = content.match(pattern);
+        if( matchResult !== null ) {
             if(RegExp.$1 !== '') {
                 precision = RegExp.$1;
                 value = value.toFixed(precision);
 
                 // only replace content if precision exists
+                content = content.replace(pattern, value);
+            }
+            else {
                 content = content.replace(pattern, value);
             }
         }
