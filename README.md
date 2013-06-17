@@ -142,6 +142,7 @@ From now on also minified version is available.
 -   [@fmsf](https://github.com/fmsf) - `content` can be a function
 -   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
 -   [@grrowl](https://github.com/grrowl) - fix tooltip position for touch devices
+-   [@Athanasius](https://github.com/Athanasius) - fix issue #17, Tooltip is outside the window
 
 
 * * *

@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2013-04-12
+ * build on 2013-06-17
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -65,16 +65,15 @@
 
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", function (event, pos, item) {
-                that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
-
                 if (item) {
                     var tipText;
 
                     // convert tooltip content template to real tipText
                     tipText = that.stringFormat(that.tooltipOptions.content, item);
 
-                    $tip.html( tipText )
-                        .css({
+                    $tip.html( tipText );
+                    that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
+                    $tip.css({
                             left: that.tipPosition.x + that.tooltipOptions.shifts.x,
                             top: that.tipPosition.y + that.tooltipOptions.shifts.y
                         })
@@ -120,7 +119,9 @@
                     'padding': '0.4em 0.6em',
                     'border-radius': '0.5em',
                     'font-size': '0.8em',
-                    'border': '1px solid #111'
+                    'border': '1px solid #111',
+                    'display': 'inline-block',
+                    'white-space': 'nowrap'
                 });
             }
         }
@@ -130,6 +131,14 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
+        var totalTipWidth = $("#flotTip").outerWidth() + this.tooltipOptions.shifts.x;
+        var totalTipHeight = $("#flotTip").outerHeight() + this.tooltipOptions.shifts.y;
+        if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
+            pos.x -= totalTipWidth;
+        }
+        if ((pos.y - $(window).scrollTop()) > ($(window).innerHeight() - totalTipHeight)) {
+            pos.y -= totalTipHeight;
+        }
         this.tipPosition.x = pos.x;
         this.tipPosition.y = pos.y;
     };
