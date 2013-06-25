@@ -44,7 +44,7 @@ In comments there are default values
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
 	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
-  If you require even more control over how the tooltip is generated you can pass a callback `function(xval, yval)` that must return a string with the format described. 
+  If you require even more control over how the tooltip is generated you can pass a callback `function(label, xval, yval)` that must return a string with the format described. 
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
