@@ -143,6 +143,7 @@ From now on also minified version is available.
 -   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
 -   [@grrowl](https://github.com/grrowl) - fix tooltip position for touch devices
 -   [@Athanasius](https://github.com/Athanasius) - fix issue #17, Tooltip is outside the window
+-   [@erezmazor](https://github.com/erezmazor) - added label to the signature of content function to allow for fully custom label drawing
 
 
 * * *
