@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2013-06-25
+ * build on 2013-07-10
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -151,7 +151,7 @@
      */
     FlotTooltip.prototype.stringFormat = function(content, item) {
 
-        var percentPattern = /%p\.{0,1}(?:\d{0,})/;
+        var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
         var xPattern = /%x\.{0,1}(?:\d{0,})/;
         var yPattern = /%y\.{0,1}(?:\d{0,})/;

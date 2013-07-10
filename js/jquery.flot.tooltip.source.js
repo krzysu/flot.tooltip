@@ -140,7 +140,7 @@
      */
     FlotTooltip.prototype.stringFormat = function(content, item) {
 
-        var percentPattern = /%p\.{0,1}(?:\d{0,})/;
+        var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
         var xPattern = /%x\.{0,1}(?:\d{0,})/;
         var yPattern = /%y\.{0,1}(?:\d{0,})/;
