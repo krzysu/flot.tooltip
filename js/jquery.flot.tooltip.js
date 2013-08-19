@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.1
+ * version: 0.6.2
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2013-07-10
+ * build on 2013-08-19
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -64,38 +64,46 @@
             var $tip = that.getDomElement();
 
             // bind event
-            $( plot.getPlaceholder() ).bind("plothover", function (event, pos, item) {
-                if (item) {
-                    var tipText;
-
-                    // convert tooltip content template to real tipText
-                    tipText = that.stringFormat(that.tooltipOptions.content, item);
-
-                    $tip.html( tipText );
-                    that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
-                    $tip.css({
-                            left: that.tipPosition.x + that.tooltipOptions.shifts.x,
-                            top: that.tipPosition.y + that.tooltipOptions.shifts.y
-                        })
-                        .show();
-
-                    // run callback
-                    if(typeof that.tooltipOptions.onHover === 'function') {
-                        that.tooltipOptions.onHover(item, $tip);
-                    }
-                }
-                else {
-                    $tip.hide().html('');
-                }
-            });
-
-            eventHolder.mousemove( function(e) {
-                var pos = {};
-                pos.x = e.pageX;
-                pos.y = e.pageY;
-                that.updateTooltipPosition(pos);
-            });
+            $( plot.getPlaceholder() ).bind("plothover", plothover);
+			
+			$(eventHolder).bind('mousemove', mouseMove);
+ 
         });
+		plot.hooks.shutdown.push(function (plot, eventHolder){
+			$(plot.getPlaceholder()).unbind("plothover", plothover);
+			$(eventHolder).unbind("mousemove", mouseMove);
+		});
+        function mouseMove(e){ 
+            var pos = {};
+            pos.x = e.pageX;
+            pos.y = e.pageY;
+            that.updateTooltipPosition(pos);
+        }
+		function plothover(event, pos, item) {
+			var $tip = that.getDomElement();
+            if (item) {
+                var tipText;
+
+                // convert tooltip content template to real tipText
+                tipText = that.stringFormat(that.tooltipOptions.content, item);
+
+                $tip.html( tipText );
+                that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
+                $tip.css({
+                        left: that.tipPosition.x + that.tooltipOptions.shifts.x,
+                        top: that.tipPosition.y + that.tooltipOptions.shifts.y
+                    })
+                    .show();
+
+                // run callback
+                if(typeof that.tooltipOptions.onHover === 'function') {
+                    that.tooltipOptions.onHover(item, $tip);
+                }
+            }
+            else {
+                $tip.hide().html('');
+            }
+        }
     };
 
     /**
