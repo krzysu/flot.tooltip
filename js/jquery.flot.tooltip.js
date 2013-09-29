@@ -120,7 +120,7 @@
                     'border-radius': '0.5em',
                     'font-size': '0.8em',
                     'border': '1px solid #111',
-                    'display': 'inline-block',
+                    'display': 'none',
                     'white-space': 'nowrap'
                 });
             }
