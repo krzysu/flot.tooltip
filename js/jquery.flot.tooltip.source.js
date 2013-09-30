@@ -147,7 +147,7 @@
 
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
-            content = content(item.series.label, item.series.data[item.dataIndex][0], item.series.data[item.dataIndex][1]);
+            content = content(item.series.label, item.series.data[item.dataIndex][0], item.series.data[item.dataIndex][1], item);
         }
 
         // percent match for pie charts
