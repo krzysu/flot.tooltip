@@ -66,7 +66,12 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6 or v0.6.1?
+### What's new in v0.6.2?
+
+-   events are properly unbinded on shutdown, thanks to [@maplemuse](https://github.com/maplemuse)
+-   hide empty tooltip div on init, thanks to [@ulipollo](https://github.com/ulipollo)
+
+### v0.6 and v0.6.1
 
 -   nothing from user perspective :) 
 -   another refactoring, `FlotTooltip` object structure changed to allow many instances to fix issue #13 (regression after v0.5 refactoring)
@@ -144,7 +149,9 @@ From now on also minified version is available.
 -   [@grrowl](https://github.com/grrowl) - fix tooltip position for touch devices
 -   [@Athanasius](https://github.com/Athanasius) - fix issue #17, Tooltip is outside the window
 -   [@erezmazor](https://github.com/erezmazor) - added label to the signature of content function to allow for fully custom label drawing
-
+-   [@maplemuse](https://github.com/maplemuse) - [pull#39](https://github.com/krzysu/flot.tooltip/pull/39)
+-   [@ulipollo](https://github.com/ulipollo) - pull#42](https://github.com/krzysu/flot.tooltip/pull/42)
+-   [@Augi](https://github.com/Augi) - pull#36](https://github.com/krzysu/flot.tooltip/pull/36)
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).

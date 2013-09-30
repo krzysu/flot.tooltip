@@ -24,39 +24,53 @@
     <h1>flot.tooltip plugin example page</h1>
 
     <div id="placeholder" style="width: 825px; height: 150px;"></div>
-
+	<a href="javascript:void(0);" class="button" id="replot">Plot</a>
 
 	<script type="text/javascript">
-	$(function () {
-		var sin = [], cos = [];
-		for (var i = 0; i < 12; i += 0.2) {
-			sin.push([i, Math.sin(i)]);
-			cos.push([i, Math.cos(i)]);
-		}
-		
-		var options = {
-			series: {
-				lines: { show: true },
-				points: { show: true }
-			},
-			grid: {
-				hoverable: true //IMPORTANT! this is needed for tooltip to work
-			},
-			yaxis: { min: -1.2, max: 1.2 },
-			tooltip: true,
-			tooltipOpts: {
-				content: "'%s' of %x.1 is %y.4",
-				shifts: {
-					x: -60,
-					y: 25
+	$(document).ready(function(){
+		console.log("document ready");
+		var offset = 0;
+		$('#replot').bind('click', function(){
+			offset = 0;
+			var intervalId = setInterval(function(){
+				plot();
+				offset = offset + 0.1;
+				if (offset > 10){
+					clearInterval(intervalId);
 				}
+			});
+		});
+		plot();
+		function plot(){
+			var sin = [], cos = [];
+			for (var i = 0; i < 12; i += 0.2) {
+				sin.push([i, Math.sin(i + offset)]);
+				cos.push([i, Math.cos(i + offset)]);
 			}
-		};
 		
-		var plotObj = $.plot( $("#placeholder"),
-			[ { data: sin, label: "sin(x)"}, { data: cos, label: "cos(x)" } ],
-			options );
-
+			var options = {
+				series: {
+					lines: { show: true },
+					points: { show: true }
+				},
+				grid: {
+					hoverable: true //IMPORTANT! this is needed for tooltip to work
+				},
+				yaxis: { min: -1.2, max: 1.2 },
+				tooltip: true,
+				tooltipOpts: {
+					content: "'%s' of %x.1 is %y.4",
+					shifts: {
+						x: -60,
+						y: 25
+					}
+				}
+			};
+		
+			var plotObj = $.plot( $("#placeholder"),
+				[ { data: sin, label: "sin(x)"}, { data: cos, label: "cos(x)" } ],
+				options );
+		}
 	});
 	</script>
 
