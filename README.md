@@ -149,9 +149,9 @@ From now on also minified version is available.
 -   [@grrowl](https://github.com/grrowl) - fix tooltip position for touch devices
 -   [@Athanasius](https://github.com/Athanasius) - fix issue #17, Tooltip is outside the window
 -   [@erezmazor](https://github.com/erezmazor) - added label to the signature of content function to allow for fully custom label drawing
--   [@maplemuse](https://github.com/maplemuse) - [pull#39](https://github.com/krzysu/flot.tooltip/pull/39)
--   [@ulipollo](https://github.com/ulipollo) - pull#42](https://github.com/krzysu/flot.tooltip/pull/42)
--   [@Augi](https://github.com/Augi) - pull#36](https://github.com/krzysu/flot.tooltip/pull/36)
+-   [@maplemuse](https://github.com/maplemuse) - pull request [#39](https://github.com/krzysu/flot.tooltip/pull/39)
+-   [@ulipollo](https://github.com/ulipollo) - pull request [#42](https://github.com/krzysu/flot.tooltip/pull/42)
+-   [@Augi](https://github.com/Augi) - pull request [#36](https://github.com/krzysu/flot.tooltip/pull/36)
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).
