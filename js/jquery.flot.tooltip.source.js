@@ -211,7 +211,7 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-        var theDate = new Date(tmst);
+	var theDate = new Date(tmst*1);
         return $.plot.formatDate(theDate, dateFormat);
     };
 
