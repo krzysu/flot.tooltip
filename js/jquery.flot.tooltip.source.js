@@ -153,9 +153,12 @@
         var xPattern = /%x\.{0,1}(?:\d{0,})/;
         var yPattern = /%y\.{0,1}(?:\d{0,})/;
 
+        var x = item.series.data[item.dataIndex][0];
+        var y = item.series.data[item.dataIndex][1];
+
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
-            content = content(item.series.label, item.series.data[item.dataIndex][0], item.series.data[item.dataIndex][1], item);
+            content = content(item.series.label, x, y, item);
         }
 
         // percent match for pie charts
@@ -170,27 +173,27 @@
 
         // time mode axes with custom dateFormat
         if(this.isTimeMode('xaxis', item) && this.isXDateFormat(item)) {
-            content = content.replace(xPattern, this.timestampToDate(item.series.data[item.dataIndex][0], this.tooltipOptions.xDateFormat));
+            content = content.replace(xPattern, this.timestampToDate(x, this.tooltipOptions.xDateFormat));
         }
 
         if(this.isTimeMode('yaxis', item) && this.isYDateFormat(item)) {
-            content = content.replace(yPattern, this.timestampToDate(item.series.data[item.dataIndex][1], this.tooltipOptions.yDateFormat));
+            content = content.replace(yPattern, this.timestampToDate(y, this.tooltipOptions.yDateFormat));
         }
 
         // set precision if defined
-        if( typeof item.series.data[item.dataIndex][0] === 'number' ) {
-            content = this.adjustValPrecision(xPattern, content, item.series.data[item.dataIndex][0]);
+        if( typeof x === 'number' ) {
+            content = this.adjustValPrecision(xPattern, content, x);
         }
-        if( typeof item.series.data[item.dataIndex][1] === 'number' ) {
-            content = this.adjustValPrecision(yPattern, content, item.series.data[item.dataIndex][1]);
+        if( typeof y === 'number' ) {
+            content = this.adjustValPrecision(yPattern, content, y);
         }
 
         // if no value customization, use tickFormatter by default
         if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
-            content = content.replace(xPattern, item.series.xaxis.tickFormatter(item.series.data[item.dataIndex][0], item.series.xaxis));
+            content = content.replace(xPattern, item.series.xaxis.tickFormatter(x, item.series.xaxis));
         }
         if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
-            content = content.replace(yPattern, item.series.yaxis.tickFormatter(item.series.data[item.dataIndex][1], item.series.yaxis));
+            content = content.replace(yPattern, item.series.yaxis.tickFormatter(y, item.series.yaxis));
         }
 
         return content;
