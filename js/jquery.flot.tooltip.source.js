@@ -153,8 +153,8 @@
         var xPattern = /%x\.{0,1}(?:\d{0,})/;
         var yPattern = /%y\.{0,1}(?:\d{0,})/;
 
-        var x = item.series.data[item.dataIndex][0];
-        var y = item.series.data[item.dataIndex][1];
+        var x = item.datapoint[0];
+        var y = item.datapoint[1];
 
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
