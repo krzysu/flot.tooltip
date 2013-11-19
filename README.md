@@ -152,6 +152,7 @@ From now on also minified version is available.
 -   [@maplemuse](https://github.com/maplemuse) - pull request [#39](https://github.com/krzysu/flot.tooltip/pull/39)
 -   [@ulipollo](https://github.com/ulipollo) - pull request [#42](https://github.com/krzysu/flot.tooltip/pull/42)
 -   [@Augi](https://github.com/Augi) - pull request [#36](https://github.com/krzysu/flot.tooltip/pull/36)
+-   [@eunomie](https://github.com/eunomie) - pull request [#52](https://github.com/krzysu/flot.tooltip/pull/52)
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).
