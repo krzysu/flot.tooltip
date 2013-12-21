@@ -29,6 +29,8 @@
                 y: 20
             },
             defaultTheme: true,
+            monthNames: null,
+            dayNames: null,
 
             // callbacks
             onHover: function(flotItem, $tooltipEl) {}
@@ -226,7 +228,7 @@
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
         var theDate = new Date(tmst);
-        return $.plot.formatDate(theDate, dateFormat);
+        return $.plot.formatDate(theDate, dateFormat, this.tooltipOptions.monthNames, this.tooltipOptions.dayNames);
     };
 
     //
