@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2013-11-18
+ * build on 2013-12-21
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -29,8 +29,6 @@
                 y: 20
             },
             defaultTheme: true,
-            monthNames: null,
-            dayNames: null,
 
             // callbacks
             onHover: function(flotItem, $tooltipEl) {}
@@ -227,8 +225,8 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-        var theDate = new Date(tmst);
-        return $.plot.formatDate(theDate, dateFormat, this.tooltipOptions.monthNames, this.tooltipOptions.dayNames);
+	var theDate = new Date(tmst*1);
+        return $.plot.formatDate(theDate, dateFormat);
     };
 
     //
