@@ -31,7 +31,9 @@ In comments there are default values
         content:        string or function      //"%s | X: %x | Y: %y"
         xDateFormat:    string                  //null
         yDateFormat:    string                  //null
-        shifts: { 
+        monthNames:     string                  // null
+        dayNames:       string                  // null
+        shifts: {
             x:          int                     //10
             y:          int                     //20
         },
@@ -47,6 +49,8 @@ In comments there are default values
   If you require even more control over how the tooltip is generated you can pass a callback `function(label, xval, yval, flotItem)` that must return a string with the format described. 
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
+-   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
+-   `dayNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
 -   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered serie
@@ -66,7 +70,11 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6.2?
+### What's new in v0.6.3?
+
+-   enable Flot original ability to change both dayNames and monthNames, fix [#28](https://github.com/krzysu/flot.tooltip/issues/28), thanks to [@Jako](https://github.com/Jako)
+
+### v0.6.2
 
 -   events are properly unbinded on shutdown, thanks to [@maplemuse](https://github.com/maplemuse)
 -   hide empty tooltip div on init, thanks to [@ulipollo](https://github.com/ulipollo)

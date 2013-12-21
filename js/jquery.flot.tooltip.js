@@ -2,7 +2,7 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.2
+ * version: 0.6.3
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
@@ -24,6 +24,8 @@
             // %p -> percent
             xDateFormat: null,
             yDateFormat: null,
+            monthNames: null,
+            dayNames: null,
             shifts: {
                 x: 10,
                 y: 20
@@ -65,20 +67,22 @@
 
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", plothover);
-			
+
 			$(eventHolder).bind('mousemove', mouseMove);
- 
         });
+
 		plot.hooks.shutdown.push(function (plot, eventHolder){
 			$(plot.getPlaceholder()).unbind("plothover", plothover);
 			$(eventHolder).unbind("mousemove", mouseMove);
 		});
-        function mouseMove(e){ 
+
+        function mouseMove(e){
             var pos = {};
             pos.x = e.pageX;
             pos.y = e.pageY;
             that.updateTooltipPosition(pos);
         }
+
 		function plothover(event, pos, item) {
 			var $tip = that.getDomElement();
             if (item) {
@@ -225,8 +229,8 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-	var theDate = new Date(tmst*1);
-        return $.plot.formatDate(theDate, dateFormat);
+        var theDate = new Date(tmst*1);
+        return $.plot.formatDate(theDate, dateFormat, this.tooltipOptions.monthNames, this.tooltipOptions.dayNames);
     };
 
     //

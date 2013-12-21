@@ -13,6 +13,8 @@
             // %p -> percent
             xDateFormat: null,
             yDateFormat: null,
+            monthNames: null,
+            dayNames: null,
             shifts: {
                 x: 10,
                 y: 20
@@ -54,20 +56,22 @@
 
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", plothover);
-			
+
 			$(eventHolder).bind('mousemove', mouseMove);
- 
         });
+
 		plot.hooks.shutdown.push(function (plot, eventHolder){
 			$(plot.getPlaceholder()).unbind("plothover", plothover);
 			$(eventHolder).unbind("mousemove", mouseMove);
 		});
-        function mouseMove(e){ 
+
+        function mouseMove(e){
             var pos = {};
             pos.x = e.pageX;
             pos.y = e.pageY;
             that.updateTooltipPosition(pos);
         }
+
 		function plothover(event, pos, item) {
 			var $tip = that.getDomElement();
             if (item) {
@@ -214,8 +218,8 @@
 
     //
     FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-	var theDate = new Date(tmst*1);
-        return $.plot.formatDate(theDate, dateFormat);
+        var theDate = new Date(tmst*1);
+        return $.plot.formatDate(theDate, dateFormat, this.tooltipOptions.monthNames, this.tooltipOptions.dayNames);
     };
 
     //
