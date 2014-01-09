@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2013-12-21
+ * build on 2014-01-09
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -165,8 +165,10 @@
 
         var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
-        var xPattern = /%x\.{0,1}(?:\d{0,})/;
-        var yPattern = /%y\.{0,1}(?:\d{0,})/;
+        var xPattern = /%x\.{0,1}(\d{0,})/;
+        var yPattern = /%y\.{0,1}(\d{0,})/;
+	var xPatternWithoutPrecision = "%x";
+	var yPatternWithoutPrecision = "%y";
 
         var x = item.datapoint[0];
         var y = item.datapoint[1];
@@ -184,6 +186,10 @@
         // series match
         if( typeof(item.series.label) !== 'undefined' ) {
             content = content.replace(seriesPattern, item.series.label);
+        }
+	else{
+            //remove %s if label is undefined
+            content = content.replace(seriesPattern, "");
         }
 
         // time mode axes with custom dateFormat
@@ -203,12 +209,19 @@
             content = this.adjustValPrecision(yPattern, content, y);
         }
 
+        // change x from number to given label, if given
+        if(typeof item.series.xaxis.ticks !== 'undefined') {
+            if(item.series.xaxis.ticks.length > item.dataIndex && !this.isTimeMode('xaxis', item))
+                content = content.replace(xPattern, item.series.xaxis.ticks[item.dataIndex].label);
+        }
         // if no value customization, use tickFormatter by default
-        if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
-            content = content.replace(xPattern, item.series.xaxis.tickFormatter(x, item.series.xaxis));
+        if(typeof item.series.xaxis.tickFormatter !== 'undefined' && item.series.xaxis.ticks.length <= item.dataIndex) {
+            //escape dollar
+            content = content.replace(xPatternWithoutPrecision, item.series.xaxis.tickFormatter(x, item.series.xaxis).replace(/\$/g, '$$'));
         }
         if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
-            content = content.replace(yPattern, item.series.yaxis.tickFormatter(y, item.series.yaxis));
+            //escape dollar
+            content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
         }
 
         return content;
