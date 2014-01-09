@@ -204,7 +204,7 @@
                 content = content.replace(xPattern, item.series.xaxis.ticks[item.dataIndex].label);
         }
         // if no value customization, use tickFormatter by default
-        if(typeof item.series.xaxis.tickFormatter !== 'undefined' && item.series.xaxis.ticks.length <= item.dataIndex) {
+        if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(xPatternWithoutPrecision, item.series.xaxis.tickFormatter(x, item.series.xaxis).replace(/\$/g, '$$'));
         }
