@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.3
+ * version: 0.6.4
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-01-09
+ * build on 2014-01-10
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -167,8 +167,8 @@
         var seriesPattern = /%s/;
         var xPattern = /%x\.{0,1}(\d{0,})/;
         var yPattern = /%y\.{0,1}(\d{0,})/;
-	var xPatternWithoutPrecision = "%x";
-	var yPatternWithoutPrecision = "%y";
+        var xPatternWithoutPrecision = "%x";
+        var yPatternWithoutPrecision = "%y";
 
         var x = item.datapoint[0];
         var y = item.datapoint[1];
@@ -187,7 +187,7 @@
         if( typeof(item.series.label) !== 'undefined' ) {
             content = content.replace(seriesPattern, item.series.label);
         }
-	else{
+        else {
             //remove %s if label is undefined
             content = content.replace(seriesPattern, "");
         }
@@ -202,10 +202,10 @@
         }
 
         // set precision if defined
-        if( typeof x === 'number' ) {
+        if(typeof x === 'number') {
             content = this.adjustValPrecision(xPattern, content, x);
         }
-        if( typeof y === 'number' ) {
+        if(typeof y === 'number') {
             content = this.adjustValPrecision(yPattern, content, y);
         }
 

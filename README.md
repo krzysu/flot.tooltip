@@ -70,7 +70,15 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6.3?
+### What's new in v0.6.4?
+
+-   great job by [@Lukindo](https://github.com/Lukindo), fixed a few issues:
+    -   precision in x or y value [#50](https://github.com/krzysu/flot.tooltip/issues/50)
+    -   concerning $ escaping [#16](https://github.com/krzysu/flot.tooltip/issues/16)
+    -   use custom ticks if given [#18](https://github.com/krzysu/flot.tooltip/issues/18)
+    -   remove %s if series label is undefined [#41](https://github.com/krzysu/flot.tooltip/issues/41)
+
+### v0.6.3
 
 -   enable Flot original ability to change both dayNames and monthNames, fix [#28](https://github.com/krzysu/flot.tooltip/issues/28), thanks to [@Jako](https://github.com/Jako)
 
@@ -161,7 +169,8 @@ From now on also minified version is available.
 -   [@ulipollo](https://github.com/ulipollo) - pull request [#42](https://github.com/krzysu/flot.tooltip/pull/42)
 -   [@Augi](https://github.com/Augi) - pull request [#36](https://github.com/krzysu/flot.tooltip/pull/36)
 -   [@eunomie](https://github.com/eunomie) - pull request [#52](https://github.com/krzysu/flot.tooltip/pull/52)
--   [@Jako](https://github.com/Jako) - pull request [#55](https://github.com/krzysu/flot.tooltip/pull/52), fix issue #28
+-   [@Jako](https://github.com/Jako) - pull request [#55](https://github.com/krzysu/flot.tooltip/pull/52), fix for issue #28
+-   [@Lukindo](https://github.com/Lukindo) - pull request [#56](https://github.com/krzysu/flot.tooltip/pull/52), fix for issues: #50, #16, #18 and #41
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).

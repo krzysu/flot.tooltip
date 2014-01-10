@@ -156,8 +156,8 @@
         var seriesPattern = /%s/;
         var xPattern = /%x\.{0,1}(\d{0,})/;
         var yPattern = /%y\.{0,1}(\d{0,})/;
-	var xPatternWithoutPrecision = "%x";
-	var yPatternWithoutPrecision = "%y";
+        var xPatternWithoutPrecision = "%x";
+        var yPatternWithoutPrecision = "%y";
 
         var x = item.datapoint[0];
         var y = item.datapoint[1];
@@ -176,7 +176,7 @@
         if( typeof(item.series.label) !== 'undefined' ) {
             content = content.replace(seriesPattern, item.series.label);
         }
-	else{
+        else {
             //remove %s if label is undefined
             content = content.replace(seriesPattern, "");
         }
@@ -191,10 +191,10 @@
         }
 
         // set precision if defined
-        if( typeof x === 'number' ) {
+        if(typeof x === 'number') {
             content = this.adjustValPrecision(xPattern, content, x);
         }
-        if( typeof y === 'number' ) {
+        if(typeof y === 'number') {
             content = this.adjustValPrecision(yPattern, content, y);
         }
 
