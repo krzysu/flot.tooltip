@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-01-10
+ * build on 2014-01-20
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -170,8 +170,8 @@
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
 
-        var x = item.datapoint[0];
-        var y = item.datapoint[1];
+        var x = item.series.data[item.dataIndex][0]; // not item.datapoint[0];
+        var y = item.series.data[item.dataIndex][1]; // not item.datapoint[1];
 
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
