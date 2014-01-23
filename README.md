@@ -70,7 +70,11 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6.4?
+### What's new in v0.6.5?
+
+-   added support for threshold.plugin with new example, fixed [#57](https://github.com/krzysu/flot.tooltip/issues/57), thanks to [@juerkkil](https://github.com/juerkkil)
+
+### v0.6.4
 
 -   great job by [@Lukindo](https://github.com/Lukindo), fixed a few issues:
     -   precision in x or y value [#50](https://github.com/krzysu/flot.tooltip/issues/50)

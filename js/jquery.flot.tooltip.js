@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.4
+ * version: 0.6.5
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-01-20
+ * build on 2014-01-23
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -170,8 +170,21 @@
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
 
-        var x = item.series.data[item.dataIndex][0]; // not item.datapoint[0];
-        var y = item.series.data[item.dataIndex][1]; // not item.datapoint[1];
+        var x, y;
+
+        // for threshold plugin we need to read data from different place
+        if (typeof item.series.threshold !== "undefined") {
+            x = item.datapoint[0];
+            y = item.datapoint[1];
+        } else {
+            x = item.series.data[item.dataIndex][0];
+            y = item.series.data[item.dataIndex][1];
+        }
+
+        // I think this is only in case of threshold plugin
+        if (item.series.label === null && item.series.originSeries) {
+            item.series.label = item.series.originSeries.label;
+        }
 
         // if it is a function callback get the content string
         if( typeof(content) === 'function' ) {
