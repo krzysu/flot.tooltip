@@ -227,6 +227,18 @@
             if(item.series.xaxis.ticks.length > item.dataIndex && !this.isTimeMode('xaxis', item))
                 content = content.replace(xPattern, item.series.xaxis.ticks[item.dataIndex].label);
         }
+
+        // change y from number to given label, if given
+        if(typeof item.series.yaxis.ticks !== 'undefined') {
+            for (var index in item.series.yaxis.ticks) {
+                if (item.series.yaxis.ticks.hasOwnProperty(index)) {
+                    if (item.series.yaxis.ticks[index].v === y) {
+                        content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
+                    }
+                }
+            }
+        }
+        
         // if no value customization, use tickFormatter by default
         if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
             //escape dollar
