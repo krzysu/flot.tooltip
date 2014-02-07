@@ -116,7 +116,7 @@
             if(this.tooltipOptions.defaultTheme) {
                 $tip.css({
                     'background': '#fff',
-                    'z-index': '100',
+                    'z-index': '1040',
                     'padding': '0.4em 0.6em',
                     'border-radius': '0.5em',
                     'font-size': '0.8em',
@@ -275,7 +275,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6.1'
+        version: '0.6.6'
     });
 
 })(jQuery);

@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.5
+ * version: 0.6.6
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-01-23
+ * build on 2014-02-07
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -127,7 +127,7 @@
             if(this.tooltipOptions.defaultTheme) {
                 $tip.css({
                     'background': '#fff',
-                    'z-index': '100',
+                    'z-index': '1040',
                     'padding': '0.4em 0.6em',
                     'border-radius': '0.5em',
                     'font-size': '0.8em',
@@ -286,7 +286,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6.1'
+        version: '0.6.6'
     });
 
 })(jQuery);
