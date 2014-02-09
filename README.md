@@ -70,7 +70,11 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6.5?
+### What's new in v0.6.6?
+
+-   added support for custom tick label on y axis, thanks to [@LoicUV](https://github.com/LoicUV)
+
+### v0.6.5
 
 -   added support for threshold.plugin with new example, fixed [#57](https://github.com/krzysu/flot.tooltip/issues/57), thanks to [@juerkkil](https://github.com/juerkkil)
 
@@ -175,6 +179,7 @@ From now on also minified version is available.
 -   [@eunomie](https://github.com/eunomie) - pull request [#52](https://github.com/krzysu/flot.tooltip/pull/52)
 -   [@Jako](https://github.com/Jako) - pull request [#55](https://github.com/krzysu/flot.tooltip/pull/52), fix for issue #28
 -   [@Lukindo](https://github.com/Lukindo) - pull request [#56](https://github.com/krzysu/flot.tooltip/pull/52), fix for issues: #50, #16, #18 and #41
+-   [@LoicUV](https://github.com/LoicUV) - pull request [#62](https://github.com/krzysu/flot.tooltip/pull/62), added support for custom tick label on y axis.
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).
