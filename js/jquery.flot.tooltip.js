@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-02-07
+ * build on 2014-02-10
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -68,13 +68,13 @@
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", plothover);
 
-			$(eventHolder).bind('mousemove', mouseMove);
+            $(eventHolder).bind('mousemove', mouseMove);
         });
 
-		plot.hooks.shutdown.push(function (plot, eventHolder){
-			$(plot.getPlaceholder()).unbind("plothover", plothover);
-			$(eventHolder).unbind("mousemove", mouseMove);
-		});
+        plot.hooks.shutdown.push(function (plot, eventHolder){
+            $(plot.getPlaceholder()).unbind("plothover", plothover);
+            $(eventHolder).unbind("mousemove", mouseMove);
+        });
 
         function mouseMove(e){
             var pos = {};
@@ -83,8 +83,8 @@
             that.updateTooltipPosition(pos);
         }
 
-		function plothover(event, pos, item) {
-			var $tip = that.getDomElement();
+        function plothover(event, pos, item) {
+            var $tip = that.getDomElement();
             if (item) {
                 var tipText;
 
@@ -232,7 +232,8 @@
         if(typeof item.series.yaxis.ticks !== 'undefined') {
             for (var index in item.series.yaxis.ticks) {
                 if (item.series.yaxis.ticks.hasOwnProperty(index)) {
-                    if (item.series.yaxis.ticks[index].v === y) {
+                    var value = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
+                    if (value === y) {
                         content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
                     }
                 }
@@ -263,6 +264,10 @@
 
     FlotTooltip.prototype.isYDateFormat = function(item) {
         return (typeof this.tooltipOptions.yDateFormat !== 'undefined' && this.tooltipOptions.yDateFormat !== null);
+    };
+
+    FlotTooltip.prototype.isCategoriesMode = function(axisName, item) {
+        return (typeof item.series[axisName].options.mode !== 'undefined' && item.series[axisName].options.mode === 'categories');
     };
 
     //
