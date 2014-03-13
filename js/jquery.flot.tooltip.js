@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-02-10
+ * build on 2014-03-13
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -224,8 +224,18 @@
 
         // change x from number to given label, if given
         if(typeof item.series.xaxis.ticks !== 'undefined') {
-            if(item.series.xaxis.ticks.length > item.dataIndex && !this.isTimeMode('xaxis', item))
-                content = content.replace(xPattern, item.series.xaxis.ticks[item.dataIndex].label);
+
+            var ticks;
+            if(this.hasRotatedXAxisTicks(item)) {
+                // xaxis.ticks will be an empty array if tickRotor is being used, but the values are available in rotatedTicks
+                ticks = 'rotatedTicks';
+            }
+            else {
+                ticks = 'ticks';
+            }
+
+            if(item.series.xaxis[ticks].length > item.dataIndex && !this.isTimeMode('xaxis', item))
+                content = content.replace(xPattern, item.series.xaxis[ticks][item.dataIndex].label);
         }
 
         // change y from number to given label, if given
@@ -256,6 +266,11 @@
     // helpers just for readability
     FlotTooltip.prototype.isTimeMode = function(axisName, item) {
         return (typeof item.series[axisName].options.mode !== 'undefined' && item.series[axisName].options.mode === 'time');
+    };
+
+     // check whether flot-tickRotor, a plugin which allows rotation of X-axis ticks, is being used
+    FlotTooltip.prototype.hasRotatedXAxisTicks = function(item) {
+        return ($.grep($.plot.plugins, function(p){ return p.name === "tickRotor"; }).length === 1 && item.series.xaxis.rotatedTicks !== 'undefined');
     };
 
     FlotTooltip.prototype.isXDateFormat = function(item) {
