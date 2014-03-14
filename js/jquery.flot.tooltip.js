@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-02-10
+ * build on 2014-03-10
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -224,8 +224,9 @@
 
         // change x from number to given label, if given
         if(typeof item.series.xaxis.ticks !== 'undefined') {
-            if(item.series.xaxis.ticks.length > item.dataIndex && !this.isTimeMode('xaxis', item))
-                content = content.replace(xPattern, item.series.xaxis.ticks[item.dataIndex].label);
+            var tickIndex = item.dataIndex + item.seriesIndex;
+            if(item.series.xaxis.ticks.length > tickIndex && !this.isTimeMode('xaxis', item))
+                content = content.replace(xPattern, item.series.xaxis.ticks[tickIndex].label);
         }
 
         // change y from number to given label, if given
