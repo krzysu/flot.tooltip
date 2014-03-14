@@ -22,7 +22,7 @@ __Important!__ You need to set flot option `hoverable` to `true` if you want flo
       hoverable: true 
     }
 
-### Plugin Options (latest version)
+### Plugin Options
 
 In comments there are default values  
 
@@ -55,18 +55,19 @@ In comments there are default values
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
 -   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered serie
 
-Depreciated in v0.5:
--   `dateFormat`
+## Supported plugins
 
-Depreciated in v0.3:
-
--   `xValText` : you can change text displayed on tooltip related to X value of hovered item
--   `yValText` : the same as above but regarding Y value
--   `series` : determine if name of series should be displayed in tooltip (if label exists)
+-   [stack plugin](http://www.flotcharts.org/flot/examples/stacking/index.html)
+-   [pie plugin](http://www.flotcharts.org/flot/examples/series-pie/index.html)
+-   [threshold plugin](http://www.flotcharts.org/flot/examples/threshold/index.html)
+-   [flot-axislabels](https://github.com/markrcote/flot-axislabels)
+-   [tickRotor](https://github.com/markrcote/flot-tickrotor)
 
 ## For developers/contributors
 
 In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. During development you should work with `js/jquery.flot.tooltip.source.js` file. You can have `grunt watch` running or run `grunt build` every time you want.
+
+In v0.6.7 was introduced simple plugin detection system. Just look up for name of the plugin like here `if (this.plotPlugins.indexOf('pluginName') !== -1) {}`.
 
 ## Changelog
 
@@ -74,6 +75,7 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 -   added support for tickRotor plugin, thanks to [@pauljandrew](https://github.com/pauljandrew)
 -   added support for flot-axislabels plugin (https://github.com/markrcote/flot-axislabels) through two new placeholders "%lx" and "%ly" for respectively x and y axis labels, thanks to [@LoicUV](https://github.com/LoicUV)
+-   added a plugin "detection" system for facilitating further plugin-dependent developments
 -   some bug fixes, thanks to [@vitorbaptista](https://github.com/vitorbaptista)
 
 ### v0.6.6
