@@ -70,7 +70,12 @@ In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. Durin
 
 ## Changelog
 
-### What's new in v0.6.6?
+### What's new in v0.6.7?
+
+-   added support for tickRotor plugin, thanks to [@pauljandrew](https://github.com/pauljandrew)
+-   some bug fixes, thanks to [@vitorbaptista](https://github.com/vitorbaptista)
+
+### v0.6.6
 
 -   added support for custom tick label on y axis, thanks to [@LoicUV](https://github.com/LoicUV)
 
@@ -180,6 +185,8 @@ From now on also minified version is available.
 -   [@Jako](https://github.com/Jako) - pull request [#55](https://github.com/krzysu/flot.tooltip/pull/52), fix for issue #28
 -   [@Lukindo](https://github.com/Lukindo) - pull request [#56](https://github.com/krzysu/flot.tooltip/pull/52), fix for issues: #50, #16, #18 and #41
 -   [@LoicUV](https://github.com/LoicUV) - pull request [#62](https://github.com/krzysu/flot.tooltip/pull/62), added support for custom tick label on y axis.
+-   [@vitorbaptista](https://github.com/vitorbaptista) - pull request [#66](https://github.com/krzysu/flot.tooltip/pull/66), fix tooltip when displaying multiple series
+-   [@pauljandrew](https://github.com/pauljandrew) - pull request [#67](https://github.com/krzysu/flot.tooltip/pull/67), add support for tickRotor plugin
 
 * * *
 Copyright (c) 2011-2013 Krzysztof Urbas (@krzysu).

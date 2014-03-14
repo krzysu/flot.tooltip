@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.6.6
+ * version: 0.6.7
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-03-10
+ * build on 2014-03-14
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -224,9 +224,21 @@
 
         // change x from number to given label, if given
         if(typeof item.series.xaxis.ticks !== 'undefined') {
+
+            var ticks;
+            if(this.hasRotatedXAxisTicks(item)) {
+                // xaxis.ticks will be an empty array if tickRotor is being used, but the values are available in rotatedTicks
+                ticks = 'rotatedTicks';
+            }
+            else {
+                ticks = 'ticks';
+            }
+
+            // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
-            if(item.series.xaxis.ticks.length > tickIndex && !this.isTimeMode('xaxis', item))
-                content = content.replace(xPattern, item.series.xaxis.ticks[tickIndex].label);
+
+            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item))
+                content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
         }
 
         // change y from number to given label, if given
@@ -240,7 +252,7 @@
                 }
             }
         }
-        
+
         // if no value customization, use tickFormatter by default
         if(typeof item.series.xaxis.tickFormatter !== 'undefined') {
             //escape dollar
@@ -257,6 +269,11 @@
     // helpers just for readability
     FlotTooltip.prototype.isTimeMode = function(axisName, item) {
         return (typeof item.series[axisName].options.mode !== 'undefined' && item.series[axisName].options.mode === 'time');
+    };
+
+     // check whether flot-tickRotor, a plugin which allows rotation of X-axis ticks, is being used
+    FlotTooltip.prototype.hasRotatedXAxisTicks = function(item) {
+        return ($.grep($.plot.plugins, function(p){ return p.name === "tickRotor"; }).length === 1 && item.series.xaxis.rotatedTicks !== 'undefined');
     };
 
     FlotTooltip.prototype.isXDateFormat = function(item) {
@@ -304,7 +321,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6.6'
+        version: '0.6.7'
     });
 
 })(jQuery);
