@@ -47,8 +47,7 @@ In comments there are default values
 	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
   If you require even more control over how the tooltip is generated you can pass a callback `function(label, xval, yval, flotItem)` that must return a string with the format described.  
-  Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders "%lx" and "%ly", that work with flot-axislabels plugin.
-
+  Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `"%lx"` and `"%ly"`, that work with flot-axislabels plugin.  
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
