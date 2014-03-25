@@ -347,7 +347,7 @@
 
     // check whether flot-tickRotor, a plugin which allows rotation of X-axis ticks, is being used
     FlotTooltip.prototype.hasRotatedXAxisTicks = function(item) {
-        return ($.grep($.plot.plugins, function(p){ return p.name === "tickRotor"; }).length === 1 && item.series.xaxis.rotatedTicks !== 'undefined');
+        return ($.grep($.plot.plugins, function(p){ return p.name === "tickRotor"; }).length === 1 && typeof item.series.xaxis.rotatedTicks !== 'undefined');
     };
 
     //
