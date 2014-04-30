@@ -16,6 +16,10 @@ Download and include on your page __after__ main jquery.flot library:
 -   [download uncompressed flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.js)
 -   [download minified flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.min.js)
 
+You can also use bower package manager:
+
+    bower install flot.tooltip
+
 __Important!__ You need to set flot option `hoverable` to `true` if you want flot.tooltip plugin to work.
 
     grid: {
@@ -191,6 +195,7 @@ From now on also minified version is available.
 -   [@LoicUV](https://github.com/LoicUV) - pull request [#62](https://github.com/krzysu/flot.tooltip/pull/62), added support for custom tick label on y axis, pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64), support for flot-axislabels plugin
 -   [@vitorbaptista](https://github.com/vitorbaptista) - pull request [#66](https://github.com/krzysu/flot.tooltip/pull/66), fix tooltip when displaying multiple series
 -   [@pauljandrew](https://github.com/pauljandrew) - pull request [#67](https://github.com/krzysu/flot.tooltip/pull/67), add support for tickRotor plugin
+-   [@pib](https://github.com/pib) - bower package manager configuration file
 
 * * *
 Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu).
