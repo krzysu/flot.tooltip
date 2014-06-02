@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-03-26
+ * build on 2014-06-02
  * released under MIT License, 2012
 */ 
 // IE8 polyfill for Array.indexOf
@@ -155,12 +155,9 @@ if (!Array.prototype.indexOf) {
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip;
+        var $tip = $('#flotTip');
 
-        if( $('#flotTip').length > 0 ){
-            $tip = $('#flotTip');
-        }
-        else {
+        if( $tip.length === 0 ){
             $tip = $('<div />').attr('id', 'flotTip');
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
@@ -183,8 +180,10 @@ if (!Array.prototype.indexOf) {
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var totalTipWidth = $("#flotTip").outerWidth() + this.tooltipOptions.shifts.x;
-        var totalTipHeight = $("#flotTip").outerHeight() + this.tooltipOptions.shifts.y;
+        var $tip = $('#flotTip');
+
+        var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
+        var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
         if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
