@@ -144,12 +144,9 @@ if (!Array.prototype.indexOf) {
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip;
+        var $tip = $('#flotTip');
 
-        if( $('#flotTip').length > 0 ){
-            $tip = $('#flotTip');
-        }
-        else {
+        if( $tip.length === 0 ){
             $tip = $('<div />').attr('id', 'flotTip');
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
@@ -172,8 +169,10 @@ if (!Array.prototype.indexOf) {
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var totalTipWidth = $("#flotTip").outerWidth() + this.tooltipOptions.shifts.x;
-        var totalTipHeight = $("#flotTip").outerHeight() + this.tooltipOptions.shifts.y;
+        var $tip = $('#flotTip');
+
+        var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
+        var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
         if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
@@ -200,16 +199,19 @@ if (!Array.prototype.indexOf) {
         var yPattern = /%y\.{0,1}(\d{0,})/;
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
+        var customTextPattern = "%ct";
 
-        var x, y;
+        var x, y, customText;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
             x = item.datapoint[0];
             y = item.datapoint[1];
+            customText = item.datapoint[2];
         } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
+            customText = item.series.data[item.dataIndex][2];
         }
 
         // I think this is only in case of threshold plugin
@@ -310,6 +312,10 @@ if (!Array.prototype.indexOf) {
         if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
+        }
+
+        if(customText) {
+            content = content.replace(customTextPattern, customText);
         }
 
         return content;
