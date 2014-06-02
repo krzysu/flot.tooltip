@@ -210,16 +210,19 @@ if (!Array.prototype.indexOf) {
         var yPattern = /%y\.{0,1}(\d{0,})/;
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
+        var customTextPattern = "%ct";
 
-        var x, y;
+        var x, y, customText;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
             x = item.datapoint[0];
             y = item.datapoint[1];
+            customText = item.datapoint[2];
         } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
+            customText = item.series.data[item.dataIndex][2];
         }
 
         // I think this is only in case of threshold plugin
@@ -320,6 +323,10 @@ if (!Array.prototype.indexOf) {
         if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
+        }
+
+        if(customText) {
+            content = content.replace(customTextPattern, customText);
         }
 
         return content;
