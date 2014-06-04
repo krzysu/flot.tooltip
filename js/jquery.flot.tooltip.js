@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-03-26
+ * build on 2014-06-04
  * released under MIT License, 2012
 */ 
 // IE8 polyfill for Array.indexOf
@@ -267,11 +267,11 @@ if (!Array.prototype.indexOf) {
 
         // time mode axes with custom dateFormat
         if(this.isTimeMode('xaxis', item) && this.isXDateFormat(item)) {
-            content = content.replace(xPattern, this.timestampToDate(x, this.tooltipOptions.xDateFormat));
+            content = content.replace(xPattern, this.timestampToDate(x, this.tooltipOptions.xDateFormat, item.series.xaxis.options));
         }
 
         if(this.isTimeMode('yaxis', item) && this.isYDateFormat(item)) {
-            content = content.replace(yPattern, this.timestampToDate(y, this.tooltipOptions.yDateFormat));
+            content = content.replace(yPattern, this.timestampToDate(y, this.tooltipOptions.yDateFormat, item.series.yaxis.options));
         }
 
         // set precision if defined
@@ -344,8 +344,8 @@ if (!Array.prototype.indexOf) {
     };
 
     //
-    FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat) {
-        var theDate = new Date(tmst*1);
+    FlotTooltip.prototype.timestampToDate = function(tmst, dateFormat, options) {
+        var theDate = $.plot.dateGenerator(tmst, options);
         return $.plot.formatDate(theDate, dateFormat, this.tooltipOptions.monthNames, this.tooltipOptions.dayNames);
     };
 
