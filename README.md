@@ -76,7 +76,7 @@ In v0.6.7 was introduced simple plugin detection system. Just look up for name o
 
 ## Changelog
 
-### What's new in v0.7?
+### What's new in v0.7.0?
 
 -   added time zone support by using $.plot.dateGenerator
 -   this version requires that jquery.flot.js is **updated to the v8.3**
