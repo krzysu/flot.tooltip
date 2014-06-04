@@ -78,7 +78,7 @@ In v0.6.7 was introduced simple plugin detection system. Just look up for name o
 
 ### What's new in v0.7.0?
 
--   added time zone support by using $.plot.dateGenerator
+-   added time zone support by using $.plot.dateGenerator by [@ilvalle](https://github.com/ilvalle)
 -   this version requires that jquery.flot.js is **updated to the v8.3**
 
 ### v0.6.7
@@ -201,7 +201,7 @@ From now on also minified version is available.
 -   [@vitorbaptista](https://github.com/vitorbaptista) - pull request [#66](https://github.com/krzysu/flot.tooltip/pull/66), fix tooltip when displaying multiple series
 -   [@pauljandrew](https://github.com/pauljandrew) - pull request [#67](https://github.com/krzysu/flot.tooltip/pull/67), add support for tickRotor plugin
 -   [@pib](https://github.com/pib) - bower package manager configuration file
--   [@ilvalle](https://github.com/ilvalle) - pull request[#77](https://github.com/krzysu/flot.tooltip/pull/77), added time zone support by using $.plot.dateGenerator
+-   [@ilvalle](https://github.com/ilvalle) - pull request [#77](https://github.com/krzysu/flot.tooltip/pull/77), added time zone support by using $.plot.dateGenerator
 
 * * *
 Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu).
