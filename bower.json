@@ -1,6 +1,6 @@
 {
   "name": "flot.tooltip",
-  "version": "0.6.7",
+  "version": "0.7",
   "main": "js/jquery.flot.tooltip.js",
   "ignore": [
     ".gitignore",
