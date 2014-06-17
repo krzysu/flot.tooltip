@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-06-04
+ * build on 2014-06-09
  * released under MIT License, 2012
 */ 
 // IE8 polyfill for Array.indexOf
@@ -218,6 +218,9 @@ if (!Array.prototype.indexOf) {
         if (typeof item.series.threshold !== "undefined") {
             x = item.datapoint[0];
             y = item.datapoint[1];
+        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+            x = item.series.datapoints.points[item.dataIndex * 2];
+            y = item.series.datapoints.points[item.dataIndex * 2 + 1];
         } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
