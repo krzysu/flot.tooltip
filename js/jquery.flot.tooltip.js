@@ -300,8 +300,12 @@ if (!Array.prototype.indexOf) {
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item))
-                content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
+                var value = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
+                if (value === x) {
+                    content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                }
+            }
         }
 
         // change y from number to given label, if given
