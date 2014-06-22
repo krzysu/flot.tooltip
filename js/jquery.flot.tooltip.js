@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.7.0
+ * version: 0.7.1
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-06-09
+ * build on 2014-06-22
  * released under MIT License, 2012
 */ 
 // IE8 polyfill for Array.indexOf
@@ -301,8 +301,8 @@ if (!Array.prototype.indexOf) {
             var tickIndex = item.dataIndex + item.seriesIndex;
 
             if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
-                var value = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
-                if (value === x) {
+                var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
+                if (valueX === x) {
                     content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
                 }
             }
@@ -312,8 +312,8 @@ if (!Array.prototype.indexOf) {
         if(typeof item.series.yaxis.ticks !== 'undefined') {
             for (var index in item.series.yaxis.ticks) {
                 if (item.series.yaxis.ticks.hasOwnProperty(index)) {
-                    var value = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
-                    if (value === y) {
+                    var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
+                    if (valueY === y) {
                         content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
                     }
                 }

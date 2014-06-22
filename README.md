@@ -51,7 +51,8 @@ In comments there are default values
 	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
   If you require even more control over how the tooltip is generated you can pass a callback `function(label, xval, yval, flotItem)` that must return a string with the format described.  
-  Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `"%lx"` and `"%ly"`, that work with flot-axislabels plugin.  
+  Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `%lx` and `%ly`, that work with flot-axislabels plugin.  
+  Pull request [#75](https://github.com/krzysu/flot.tooltip/pull/75) introduced `%ct` placeholder for any custom text withing label (see example in `examples/custom-label-text.html`)  
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
@@ -76,7 +77,13 @@ In v0.6.7 was introduced simple plugin detection system. Just look up for name o
 
 ## Changelog
 
-### What's new in v0.7.0?
+
+### What's new in v0.7.1?
+
+-   merged pull requests: [#78](https://github.com/krzysu/flot.tooltip/pull/78), [#74](https://github.com/krzysu/flot.tooltip/pull/74), [#75](https://github.com/krzysu/flot.tooltip/pull/75)
+-   added support for any arbitrary text in a label with a new `%ct` placeholder (see [#75](https://github.com/krzysu/flot.tooltip/pull/75) or example in `examples/custom-label-text.html`)
+
+### v0.7.0
 
 -   added time zone support by using $.plot.dateGenerator by [@ilvalle](https://github.com/ilvalle)
 -   this version requires that jquery.flot.js is **updated to the v8.3**

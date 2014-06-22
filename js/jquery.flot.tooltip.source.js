@@ -289,16 +289,20 @@ if (!Array.prototype.indexOf) {
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item))
-                content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
+                var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
+                if (valueX === x) {
+                    content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                }
+            }
         }
 
         // change y from number to given label, if given
         if(typeof item.series.yaxis.ticks !== 'undefined') {
             for (var index in item.series.yaxis.ticks) {
                 if (item.series.yaxis.ticks.hasOwnProperty(index)) {
-                    var value = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
-                    if (value === y) {
+                    var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
+                    if (valueY === y) {
                         content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
                     }
                 }
