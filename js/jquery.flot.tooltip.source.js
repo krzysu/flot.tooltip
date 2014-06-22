@@ -207,6 +207,9 @@ if (!Array.prototype.indexOf) {
         if (typeof item.series.threshold !== "undefined") {
             x = item.datapoint[0];
             y = item.datapoint[1];
+        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+            x = item.series.datapoints.points[item.dataIndex * 2];
+            y = item.series.datapoints.points[item.dataIndex * 2 + 1];
         } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
