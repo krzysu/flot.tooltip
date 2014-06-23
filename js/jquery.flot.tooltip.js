@@ -6,7 +6,7 @@
  * author: Krzysztof Urbas @krzysu [myviews.pl]
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-06-22
+ * build on 2014-06-24
  * released under MIT License, 2012
 */ 
 // IE8 polyfill for Array.indexOf
@@ -63,7 +63,9 @@ if (!Array.prototype.indexOf) {
             defaultTheme: true,
 
             // callbacks
-            onHover: function(flotItem, $tooltipEl) {}
+            onHover: function(flotItem, $tooltipEl) {},
+
+            $compat: false
         }
     };
 
@@ -101,6 +103,14 @@ if (!Array.prototype.indexOf) {
 
             // shortcut to access tooltip options
             that.tooltipOptions = that.plotOptions.tooltipOpts;
+
+            if (that.tooltipOptions.$compat) {
+                that.wfunc = 'width';
+                that.hfunc = 'height';
+            } else {
+                that.wfunc = 'innerWidth';
+                that.hfunc = 'innerHeight';
+            }
 
             // create tooltip DOM element
             var $tip = that.getDomElement();
@@ -184,10 +194,10 @@ if (!Array.prototype.indexOf) {
 
         var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
         var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
-        if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
+        if ((pos.x - $(window).scrollLeft()) > ($(window)[this.wfunc]() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
-        if ((pos.y - $(window).scrollTop()) > ($(window).innerHeight() - totalTipHeight)) {
+        if ((pos.y - $(window).scrollTop()) > ($(window)[this.hfunc]() - totalTipHeight)) {
             pos.y -= totalTipHeight;
         }
         this.tipPosition.x = pos.x;
@@ -403,7 +413,7 @@ if (!Array.prototype.indexOf) {
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6.7'
+        version: '0.7.1'
     });
 
 })(jQuery);
