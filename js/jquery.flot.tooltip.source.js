@@ -52,7 +52,10 @@ if (!Array.prototype.indexOf) {
             defaultTheme: true,
 
             // callbacks
-            onHover: function(flotItem, $tooltipEl) {}
+            onHover: function(flotItem, $tooltipEl) {},
+
+            // compatibility with some jQuery versions
+            $compat: false
         }
     };
 
@@ -90,6 +93,15 @@ if (!Array.prototype.indexOf) {
 
             // shortcut to access tooltip options
             that.tooltipOptions = that.plotOptions.tooltipOpts;
+
+            // compatibility with some jQuery versions
+            if (that.tooltipOptions.$compat) {
+                that.wfunc = 'width';
+                that.hfunc = 'height';
+            } else {
+                that.wfunc = 'innerWidth';
+                that.hfunc = 'innerHeight';
+            }
 
             // create tooltip DOM element
             var $tip = that.getDomElement();
@@ -144,9 +156,12 @@ if (!Array.prototype.indexOf) {
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip = $('#flotTip');
+        var $tip;
 
-        if( $tip.length === 0 ){
+        if( $('#flotTip').length > 0 ){
+            $tip = $('#flotTip');
+        }
+        else {
             $tip = $('<div />').attr('id', 'flotTip');
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
@@ -169,14 +184,12 @@ if (!Array.prototype.indexOf) {
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var $tip = $('#flotTip');
-
-        var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
-        var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
-        if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
+        var totalTipWidth = $("#flotTip").outerWidth() + this.tooltipOptions.shifts.x;
+        var totalTipHeight = $("#flotTip").outerHeight() + this.tooltipOptions.shifts.y;
+        if ((pos.x - $(window).scrollLeft()) > ($(window)[this.wfunc]() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
-        if ((pos.y - $(window).scrollTop()) > ($(window).innerHeight() - totalTipHeight)) {
+        if ((pos.y - $(window).scrollTop()) > ($(window)[this.hfunc]() - totalTipHeight)) {
             pos.y -= totalTipHeight;
         }
         this.tipPosition.x = pos.x;
@@ -199,24 +212,16 @@ if (!Array.prototype.indexOf) {
         var yPattern = /%y\.{0,1}(\d{0,})/;
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
-        var customTextPattern = "%ct";
 
-        var x, y, customText;
+        var x, y;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
             x = item.datapoint[0];
             y = item.datapoint[1];
-            customText = item.datapoint[2];
-        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
-            x = item.series.datapoints.points[item.dataIndex * 2];
-            y = item.series.datapoints.points[item.dataIndex * 2 + 1];
-            // TODO: where to find custom text in this variant?
-            customText = "";
         } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
-            customText = item.series.data[item.dataIndex][2];
         }
 
         // I think this is only in case of threshold plugin
@@ -293,20 +298,16 @@ if (!Array.prototype.indexOf) {
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
-                var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
-                if (valueX === x) {
-                    content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
-                }
-            }
+            if(item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item))
+                content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
         }
 
         // change y from number to given label, if given
         if(typeof item.series.yaxis.ticks !== 'undefined') {
             for (var index in item.series.yaxis.ticks) {
                 if (item.series.yaxis.ticks.hasOwnProperty(index)) {
-                    var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
-                    if (valueY === y) {
+                    var value = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
+                    if (value === y) {
                         content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
                     }
                 }
@@ -321,10 +322,6 @@ if (!Array.prototype.indexOf) {
         if(typeof item.series.yaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
-        }
-
-        if(customText) {
-            content = content.replace(customTextPattern, customText);
         }
 
         return content;
