@@ -50,6 +50,10 @@ if (!Array.prototype.indexOf) {
                 y: 20
             },
             defaultTheme: true,
+            lines: {
+                track: false,
+                threshold: 0.05
+            },
 
             // callbacks
             onHover: function(flotItem, $tooltipEl) {}
@@ -112,29 +116,124 @@ if (!Array.prototype.indexOf) {
             that.updateTooltipPosition(pos);
         }
 
+        function lineDistance(p1x, p1y, p2x, p2y) {
+            return Math.sqrt((p2x - p1x) * (p2x - p1x) + (p2y - p1y) * (p2y - p1y));
+        }
+
+        // Here is some voodoo magic for determining the distance to a line form a given point {x, y}.
+        function dotLineLength(x, y, x0, y0, x1, y1, o) {
+            if (o && !(o = 
+                function (x, y, x0, y0, x1, y1) {
+                    if (!(x1 - x0)) return {x: x0, y: y};
+                    else if(!(y1 - y0)) return {x: x, y: y0};
+                    
+                    var left,
+                        tg = -1 / ((y1 - y0) / (x1 - x0));
+                    
+                    return {
+                        x: left = (x1 * (x * tg - y + y0) + x0 * (x * - tg + y - y1)) / (tg * (x1 - x0) + y0 - y1),
+                        y: tg * left - tg * x + y
+                    };
+                }(x, y, x0, y0, x1, y1), 
+                o.x >= Math.min(x0, x1) && o.x <= Math.max(x0, x1) && o.y >= Math.min(y0, y1) && o.y <= Math.max(y0, y1))
+            ) {
+                var l1 = lineDistance(x, y, x0, y0), l2 = lineDistance(x, y, x1, y1);
+                return l1 > l2 ? l2 : l1;
+            } else {
+                var a = y0 - y1, b = x1 - x0, c = x0 * y1 - y0 * x1;
+                return Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b);
+            }
+        }
+
         function plothover(event, pos, item) {
-            var $tip = that.getDomElement();
-            if (item) {
-                var tipText;
+            function showTooltip(item) {
+                var $tip = that.getDomElement();
 
                 // convert tooltip content template to real tipText
-                tipText = that.stringFormat(that.tooltipOptions.content, item);
+                var tipText = that.stringFormat(that.tooltipOptions.content, item);
 
-                $tip.html( tipText );
+                $tip.html(tipText);
                 that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
                 $tip.css({
-                        left: that.tipPosition.x + that.tooltipOptions.shifts.x,
-                        top: that.tipPosition.y + that.tooltipOptions.shifts.y
-                    })
-                    .show();
+                    left: that.tipPosition.x + that.tooltipOptions.shifts.x,
+                    top: that.tipPosition.y + that.tooltipOptions.shifts.y
+                }).show();
 
                 // run callback
-                if(typeof that.tooltipOptions.onHover === 'function') {
+                if (typeof that.tooltipOptions.onHover === 'function') {
                     that.tooltipOptions.onHover(item, $tip);
                 }
             }
-            else {
-                $tip.hide().html('');
+
+            function hideTooltip() {
+                that.getDomElement().hide().html('');
+            }
+
+            if (item) {
+                showTooltip(item);
+            } else if (that.tooltipOptions.lines.track === true) {
+                var closestTrace = {
+                    distance: -1
+                };
+
+                $.each(plot.getData(), function (i, series) {
+                    var xBeforeIndex = 0,
+                        xAfterIndex = -1;
+
+                    // Our search here assumes our data is sorted via the x-axis.
+                    // TODO: Improve efficiency somehow - search smaller sets of data.
+                    for (var j = 1; j < series.data.length; j++) {
+                        if (series.data[j - 1][0] <= pos.x && series.data[j][0] >= pos.x) {
+                            xBeforeIndex = j - 1;
+                            xAfterIndex = j;
+                        }
+                    }
+
+                    if (xAfterIndex === -1) {
+                        hideTooltip();
+                        return;
+                    }
+
+                    var pointPrev = { x: series.data[xBeforeIndex][0], y: series.data[xBeforeIndex][1] },
+                        pointNext = { x: series.data[xAfterIndex][0], y: series.data[xAfterIndex][1] };
+
+                    var distToLine = dotLineLength(pos.x, pos.y, pointPrev.x, pointPrev.y, pointNext.x, pointNext.y, false);
+
+                    if (distToLine < that.tooltipOptions.lines.threshold) {
+
+                        var closestIndex = lineDistance(pointPrev.x, pointPrev.y, pos.x, pos.y)
+                            > lineDistance(pos.x, pos.y, pointNext.x, pointNext.y) ? xBeforeIndex : xAfterIndex;
+
+                        var pointSize = series.datapoints.pointsize;
+
+                        // Calculate the point on the line vertically closest to our cursor.
+                        var pointOnLine = [
+                            pos.x,
+                            pointPrev.y + ((pointNext.y - pointPrev.y) * ((pos.x - pointPrev.x) / (pointNext.x - pointPrev.x)))
+                        ];
+
+                        var item = {
+                            datapoint: pointOnLine,
+                            dataIndex: closestIndex,
+                            series: series,
+                            seriesIndex: i
+                        };
+
+                        if (closestTrace.distance === -1 || distToLine < closestTrace.distance) {
+                            closestTrace = {
+                                distance: distToLine,
+                                item: item
+                            };
+                        }
+                    }
+                });
+
+                if (closestTrace.distance !== -1)
+                    showTooltip(closestTrace.item);
+                else
+                    hideTooltip();
+            } else {
+                hideTooltip();
             }
         }
     };
