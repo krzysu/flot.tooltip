@@ -171,7 +171,7 @@ if (!Array.prototype.indexOf) {
 
             if (item) {
                 showTooltip(item);
-            } else if (that.tooltipOptions.lines.track === true) {
+            } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines.track === true) {
                 var closestTrace = {
                     distance: -1
                 };
