@@ -32,6 +32,7 @@ In comments there are default values
 
     tooltip:            boolean                 //false
     tooltipOpts: {
+        id:             string                  //"flotTip"
         content:        string or function      //"%s | X: %x | Y: %y"
         xDateFormat:    string                  //null
         yDateFormat:    string                  //null
@@ -40,13 +41,18 @@ In comments there are default values
         shifts: {
             x:          int                     //10
             y:          int                     //20
-        },
+        }
         defaultTheme:   boolean                 //true
+        lines: {
+            track:      boolean                 //false
+            threshold:  number                  //0.05
+        }
         onHover:        function(flotItem, $tooltipEl)
     }
 
 
 -   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
+-   `id` : the id to assign to the tooltip's HTML DIV element, defaulted to "flotTip" 
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
 	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
@@ -59,6 +65,8 @@ In comments there are default values
 -   `dayNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` in your CSS
+-   `lines.track` : whether or not to have a tooltip on hover for lines between points
+-   `lines.threshold` : the data-based threshold for the maximum distance from the line to show the tooltip
 -   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered serie
 
 ## Supported plugins
@@ -78,7 +86,14 @@ In v0.6.7 was introduced simple plugin detection system. Just look up for name o
 ## Changelog
 
 
-### What's new in v0.7.1?
+### What's new in v0.8.3?
+
+-   merged pull requests: [#86](https://github.com/krzysu/flot.tooltip/pull/86), [#85](https://github.com/krzysu/flot.tooltip/pull/85), [#83](https://github.com/krzysu/flot.tooltip/pull/83)
+-   pull request #86 introduced support for showing tooltips when hovering over the lines between points
+-   dropped the IE polyfill indexOf in favor of jQuery's $.inArray
+-   these changes were actually distributed across v0.8.0-v0.8.3, but they all happened one after another so the changes have been summarized together
+
+### v0.7.1
 
 -   merged pull requests: [#78](https://github.com/krzysu/flot.tooltip/pull/78), [#74](https://github.com/krzysu/flot.tooltip/pull/74), [#75](https://github.com/krzysu/flot.tooltip/pull/75)
 -   added support for any arbitrary text in a label with a new `%ct` placeholder (see [#75](https://github.com/krzysu/flot.tooltip/pull/75) or example in `examples/custom-label-text.html`)
@@ -192,6 +207,7 @@ From now on also minified version is available.
 
 ## Contributors
 
+-   [@Roundaround](https://github.com/Roundaround) - continuous contributor and co-author
 -   [@ismyrnow](https://github.com/ismyrnow) - add jquery.flot.pie plugin support
 -   [@fmsf](https://github.com/fmsf) - `content` can be a function
 -   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
@@ -209,8 +225,10 @@ From now on also minified version is available.
 -   [@pauljandrew](https://github.com/pauljandrew) - pull request [#67](https://github.com/krzysu/flot.tooltip/pull/67), add support for tickRotor plugin
 -   [@pib](https://github.com/pib) - bower package manager configuration file
 -   [@ilvalle](https://github.com/ilvalle) - pull request [#77](https://github.com/krzysu/flot.tooltip/pull/77), added time zone support by using $.plot.dateGenerator
+-   [@willianganzert](https://github.com/willianganzert) - pull request [#83](https://github.com/krzysu/flot.tooltip/pull/83), Add "id" to tooltip element
+-   [@larsenmtl](https://github.com/larsenmtl) - pull request [#85](https://github.com/krzysu/flot.tooltip/pull/85), Support for stacked percent plugin
 
 * * *
-Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu).
+Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
 
 __jquery.flot.tooltip__ is available under the MIT license.

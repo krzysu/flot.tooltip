@@ -229,7 +229,7 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip = $('#'+this.tooltipOptions.id);
+        var $tip = $('#' + this.tooltipOptions.id);
 
         if( $tip.length === 0 ){
             $tip = $('<div />').attr('id', this.tooltipOptions.id);
@@ -254,7 +254,7 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var $tip = $('#'+this.tooltipOptions.id);
+        var $tip = $('#' + this.tooltipOptions.id);
 
         var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
         var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
@@ -315,11 +315,11 @@
         }
 
         // percent match for pie charts and stacked percent
-		if (typeof (item.series.percent) !== 'undefined'){
-			p = item.series.percent;
-		} else if (typeof (item.series.percents) !== 'undefined'){
-			p = item.series.percents[item.dataIndex];
-		}		
+        if (typeof (item.series.percent) !== 'undefined'){
+            p = item.series.percent;
+        } else if (typeof (item.series.percents) !== 'undefined'){
+            p = item.series.percents[item.dataIndex];
+        }        
         if( typeof p === 'number' ) {
             content = this.adjustValPrecision(percentPattern, content, p);
         }
@@ -482,7 +482,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.8.1'
+        version: '0.8.3'
     });
 
 })(jQuery);

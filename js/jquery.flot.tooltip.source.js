@@ -3,6 +3,7 @@
     var defaultOptions = {
         tooltip: false,
         tooltipOpts: {
+            id: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
@@ -217,10 +218,10 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip = $('#flotTip');
+        var $tip = $('#' + this.tooltipOptions.id);
 
         if( $tip.length === 0 ){
-            $tip = $('<div />').attr('id', 'flotTip');
+            $tip = $('<div />').attr('id', this.tooltipOptions.id);
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
             if(this.tooltipOptions.defaultTheme) {
@@ -242,7 +243,7 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var $tip = $('#flotTip');
+        var $tip = $('#' + this.tooltipOptions.id);
 
         var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
         var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
@@ -274,7 +275,7 @@
         var yPatternWithoutPrecision = "%y";
         var customTextPattern = "%ct";
 
-        var x, y, customText;
+        var x, y, customText, p;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
@@ -302,9 +303,14 @@
             content = content(item.series.label, x, y, item);
         }
 
-        // percent match for pie charts
-        if( typeof (item.series.percent) !== 'undefined' ) {
-            content = this.adjustValPrecision(percentPattern, content, item.series.percent);
+        // percent match for pie charts and stacked percent
+        if (typeof (item.series.percent) !== 'undefined'){
+            p = item.series.percent;
+        } else if (typeof (item.series.percents) !== 'undefined'){
+            p = item.series.percents[item.dataIndex];
+        }        
+        if( typeof p === 'number' ) {
+            content = this.adjustValPrecision(percentPattern, content, p);
         }
 
         // series match
@@ -465,7 +471,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.8.1'
+        version: '0.8.3'
     });
 
 })(jQuery);
