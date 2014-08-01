@@ -285,7 +285,7 @@
         var yPatternWithoutPrecision = "%y";
         var customTextPattern = "%ct";
 
-        var x, y, customText;
+        var x, y, customText, p;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
@@ -313,9 +313,14 @@
             content = content(item.series.label, x, y, item);
         }
 
-        // percent match for pie charts
-        if( typeof (item.series.percent) !== 'undefined' ) {
-            content = this.adjustValPrecision(percentPattern, content, item.series.percent);
+        // percent match for pie charts and stacked percent
+		if (typeof (item.series.percent) !== 'undefined'){
+			p = item.series.percent;
+		} else if (typeof (item.series.percents) !== 'undefined'){
+			p = item.series.percents[item.dataIndex];
+		}		
+        if( typeof p === 'number' ) {
+            content = this.adjustValPrecision(percentPattern, content, p);
         }
 
         // series match
