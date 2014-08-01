@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         ' * \n' +
         ' * description: <%= pkg.description %>\n' +
         ' * version: <%= pkg.version %>\n' +
-        ' * author: <%= pkg.author %>\n' +
+        ' * authors: <%= pkg.authors %>\n' +
         ' * website: <%= pkg.website %>\n' +
         ' * \n' +
         ' * build on <%= grunt.template.today("yyyy-mm-dd") %>\n' +

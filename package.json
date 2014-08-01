@@ -1,6 +1,6 @@
 {
   "name": "jquery.flot.tooltip",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "easy-to-use tooltips for Flot charts",
   "website": "https://github.com/krzysu/flot.tooltip",
   "directories": {
@@ -29,7 +29,7 @@
     "js",
     "grunt"
   ],
-  "author": "Krzysztof Urbas @krzysu [myviews.pl]",
+  "authors": ["Krzysztof Urbas @krzysu [myviews.pl]", "Evan Steinkerchner @Roundaround"],
   "license": "MIT",
   "readmeFilename": "README.md"
 }

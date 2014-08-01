@@ -118,25 +118,25 @@ if (!Array.prototype.indexOf) {
 
         function plothover(event, pos, item) {
             // Simple distance formula.
-            function lineDistance(p1x, p1y, p2x, p2y) {
+            var lineDistance = function (p1x, p1y, p2x, p2y) {
                 return Math.sqrt((p2x - p1x) * (p2x - p1x) + (p2y - p1y) * (p2y - p1y));
-            }
+            };
 
             // Here is some voodoo magic for determining the distance to a line form a given point {x, y}.
-            function dotLineLength(x, y, x0, y0, x1, y1, o) {
+            var dotLineLength = function (x, y, x0, y0, x1, y1, o) {
                 if (o && !(o =
                     function (x, y, x0, y0, x1, y1) {
-                        if (!(x1 - x0)) return { x: x0, y: y };
-                else if (!(y1 - y0)) return { x: x, y: y0 };
+                        if (typeof x0 !== 'undefined') return { x: x0, y: y };
+                        else if (typeof y0 !== 'undefined') return { x: x, y: y0 };
 
                         var left,
                             tg = -1 / ((y1 - y0) / (x1 - x0));
 
                         return {
-                    x: left = (x1 * (x * tg - y + y0) + x0 * (x * -tg + y - y1)) / (tg * (x1 - x0) + y0 - y1),
-                    y: tg * left - tg * x + y
-                };
-                }(x, y, x0, y0, x1, y1),
+                            x: left = (x1 * (x * tg - y + y0) + x0 * (x * -tg + y - y1)) / (tg * (x1 - x0) + y0 - y1),
+                            y: tg * left - tg * x + y
+                        };
+                    } (x, y, x0, y0, x1, y1),
                     o.x >= Math.min(x0, x1) && o.x <= Math.max(x0, x1) && o.y >= Math.min(y0, y1) && o.y <= Math.max(y0, y1))
                 ) {
                     var l1 = lineDistance(x, y, x0, y0), l2 = lineDistance(x, y, x1, y1);
@@ -145,7 +145,7 @@ if (!Array.prototype.indexOf) {
                     var a = y0 - y1, b = x1 - x0, c = x0 * y1 - y0 * x1;
                     return Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b);
                 }
-            }
+            };
 
             // Quick little function for showing the tooltip.
             function showTooltip(item) {
@@ -204,8 +204,8 @@ if (!Array.prototype.indexOf) {
 
                     if (distToLine < that.tooltipOptions.lines.threshold) {
 
-                        var closestIndex = lineDistance(pointPrev.x, pointPrev.y, pos.x, pos.y)
-                            > lineDistance(pos.x, pos.y, pointNext.x, pointNext.y) ? xBeforeIndex : xAfterIndex;
+                        var closestIndex = lineDistance(pointPrev.x, pointPrev.y, pos.x, pos.y) <
+                            lineDistance(pos.x, pos.y, pointNext.x, pointNext.y) ? xBeforeIndex : xAfterIndex;
 
                         var pointSize = series.datapoints.pointsize;
 
@@ -494,7 +494,7 @@ if (!Array.prototype.indexOf) {
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.6.7'
+        version: '0.8.0'
     });
 
 })(jQuery);
