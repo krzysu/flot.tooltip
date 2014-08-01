@@ -81,7 +81,7 @@ In comments there are default values
 
 In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. During development you should work with `js/jquery.flot.tooltip.source.js` file. You can have `grunt watch` running or run `grunt build` every time you want.
 
-In v0.6.7 was introduced simple plugin detection system. Just look up for name of the plugin like here `if (this.plotPlugins.indexOf('pluginName') !== -1) {}`.
+In v0.6.7 was introduced simple plugin detection system. Just look up for name of the plugin like here `if ($.inArray(this.plotPlugins, 'pluginName') !== -1) {}`.
 
 ## Changelog
 
