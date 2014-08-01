@@ -79,9 +79,13 @@ In comments there are default values
 
 ## For developers/contributors
 
-In v0.5 I added [grunt.js](http://gruntjs.com/) as easy to use build tool. During development you should work with `js/jquery.flot.tooltip.source.js` file. You can have `grunt watch` running or run `grunt build` every time you want.
+If you wish to contribute, please do so by editing the jquery.flot.tooltip.source.js file.  The other .js files are built with Grunt and should not be directly edited.
 
-In v0.6.7 was introduced simple plugin detection system. Just look up for name of the plugin like here `if ($.inArray(this.plotPlugins, 'pluginName') !== -1) {}`.
+When working with external plugin support, you can use the array plotPlugins (via this.plotPlugins), which is a collection of the names of the currently loaded Flot plugins.  For instance if checking for the existance of the official
+symbol plugin, you would check if ($.inArray(this.plotPlugins, 'symbol') !== -1).
+
+There exists a Gruntfile.js for development purposes, but please do not commit built production or minified .js files when making a pull request.  Additionally, do not change the version, because the new version could vary depending on
+when the pull request is merged and how many other changes were made at the same time.
 
 ## Changelog
 
