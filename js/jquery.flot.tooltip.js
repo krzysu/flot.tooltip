@@ -14,6 +14,7 @@
     var defaultOptions = {
         tooltip: false,
         tooltipOpts: {
+            id: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
@@ -228,10 +229,10 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function() {
-        var $tip = $('#flotTip');
+        var $tip = $('#'+this.tooltipOptions.id);
 
         if( $tip.length === 0 ){
-            $tip = $('<div />').attr('id', 'flotTip');
+            $tip = $('<div />').attr('id', this.tooltipOptions.id);
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
             if(this.tooltipOptions.defaultTheme) {
@@ -253,7 +254,7 @@
 
     // as the name says
     FlotTooltip.prototype.updateTooltipPosition = function(pos) {
-        var $tip = $('#flotTip');
+        var $tip = $('#'+this.tooltipOptions.id);
 
         var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
         var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
