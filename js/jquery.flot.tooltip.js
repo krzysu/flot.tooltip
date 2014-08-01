@@ -2,43 +2,14 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.8.0
+ * version: 0.8.1
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
  * build on 2014-08-01
  * released under MIT License, 2012
 */ 
-// IE8 polyfill for Array.indexOf
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function (searchElement, fromIndex) {
-        if ( this === undefined || this === null ) {
-            throw new TypeError( '"this" is null or not defined' );
-        }
-        var length = this.length >>> 0; // Hack to convert object.length to a UInt32
-        fromIndex = +fromIndex || 0;
-        if (Math.abs(fromIndex) === Infinity) {
-            fromIndex = 0;
-        }
-        if (fromIndex < 0) {
-            fromIndex += length;
-            if (fromIndex < 0) {
-                fromIndex = 0;
-            }
-        }
-
-        for (;fromIndex < length; fromIndex++) {
-            if (this[fromIndex] === searchElement) {
-                return fromIndex;
-            }
-        }
-
-        return -1;
-    };
-}
-
 (function ($) {
-
     // plugin options, default values
     var defaultOptions = {
         tooltip: false,
@@ -487,7 +458,7 @@ if (!Array.prototype.indexOf) {
 
     // check if flot-axislabels plugin (https://github.com/markrcote/flot-axislabels) is used and that an axis label is given
     FlotTooltip.prototype.hasAxisLabel = function(axisName, item) {
-        return (this.plotPlugins.indexOf('axisLabels') !== -1 && typeof item.series[axisName].options.axisLabel !== 'undefined' && item.series[axisName].options.axisLabel.length > 0);
+        return ($.inArray(this.plotPlugins, 'axisLabels') !== -1 && typeof item.series[axisName].options.axisLabel !== 'undefined' && item.series[axisName].options.axisLabel.length > 0);
     };
 
     // check whether flot-tickRotor, a plugin which allows rotation of X-axis ticks, is being used
@@ -505,7 +476,7 @@ if (!Array.prototype.indexOf) {
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.8.0'
+        version: '0.8.1'
     });
 
 })(jQuery);
