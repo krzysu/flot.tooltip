@@ -28,7 +28,9 @@
             },
 
             // callbacks
-            onHover: function(flotItem, $tooltipEl) {}
+            onHover: function(flotItem, $tooltipEl) {},
+
+            $compat: false
         }
     };
 
@@ -66,6 +68,14 @@
 
             // shortcut to access tooltip options
             that.tooltipOptions = that.plotOptions.tooltipOpts;
+
+            if (that.tooltipOptions.$compat) {
+                that.wfunc = 'width';
+                that.hfunc = 'height';
+            } else {
+                that.wfunc = 'innerWidth';
+                that.hfunc = 'innerHeight';
+            }
 
             // create tooltip DOM element
             var $tip = that.getDomElement();
@@ -247,10 +257,10 @@
 
         var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
         var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
-        if ((pos.x - $(window).scrollLeft()) > ($(window).innerWidth() - totalTipWidth)) {
+        if ((pos.x - $(window).scrollLeft()) > ($(window)[this.wfunc]() - totalTipWidth)) {
             pos.x -= totalTipWidth;
         }
-        if ((pos.y - $(window).scrollTop()) > ($(window).innerHeight() - totalTipHeight)) {
+        if ((pos.y - $(window).scrollTop()) > ($(window)[this.hfunc]() - totalTipHeight)) {
             pos.y -= totalTipHeight;
         }
         this.tipPosition.x = pos.x;
