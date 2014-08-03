@@ -13,8 +13,8 @@ Check `examples` folder for details of how to use it.
 ## How to use
 Download and include on your page __after__ main jquery.flot library:
 
--   [download uncompressed flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.js)
--   [download minified flot.tooltip](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.min.js)
+-   [Latest Release](https://github.com/krzysu/flot.tooltip/releases/latest)
+-   [Nightly Build](https://raw.github.com/krzysu/flot.tooltip/master/js/jquery.flot.tooltip.js)
 
 You can also use bower package manager:
 
@@ -71,11 +71,12 @@ In comments there are default values
 
 ## Supported plugins
 
--   [stack plugin](http://www.flotcharts.org/flot/examples/stacking/index.html)
--   [pie plugin](http://www.flotcharts.org/flot/examples/series-pie/index.html)
--   [threshold plugin](http://www.flotcharts.org/flot/examples/threshold/index.html)
--   [flot-axislabels](https://github.com/markrcote/flot-axislabels)
+-   [stack](http://www.flotcharts.org/flot/examples/stacking/index.html)
+-   [pie](http://www.flotcharts.org/flot/examples/series-pie/index.html)
+-   [threshold](http://www.flotcharts.org/flot/examples/threshold/index.html)
+-   [axislabels](https://github.com/markrcote/flot-axislabels)
 -   [tickRotor](https://github.com/markrcote/flot-tickrotor)
+-   [stackpercent](https://github.com/skeleton9/flot.stackpercent)
 
 ## For developers/contributors
 
@@ -231,6 +232,7 @@ From now on also minified version is available.
 -   [@ilvalle](https://github.com/ilvalle) - pull request [#77](https://github.com/krzysu/flot.tooltip/pull/77), added time zone support by using $.plot.dateGenerator
 -   [@willianganzert](https://github.com/willianganzert) - pull request [#83](https://github.com/krzysu/flot.tooltip/pull/83), Add "id" to tooltip element
 -   [@larsenmtl](https://github.com/larsenmtl) - pull request [#85](https://github.com/krzysu/flot.tooltip/pull/85), Support for stacked percent plugin
+-   [@RoboterHund](https://github.com/RoboterHund) - pull request [#86](https://github.com/krzysu/flot.tooltip/pull/86), Compatibility fix for older versions of jQuery
 
 * * *
 Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
