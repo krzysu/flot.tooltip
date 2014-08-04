@@ -2,7 +2,7 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.8.3
+ * version: 0.8.4
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
@@ -104,7 +104,7 @@
             var pos = {};
             pos.x = e.pageX;
             pos.y = e.pageY;
-            that.updateTooltipPosition(pos);
+            plot.setTooltipPosition(pos);
         }
 
         function plothover(event, pos, item) {
@@ -138,33 +138,8 @@
                 }
             };
 
-            // Quick little function for showing the tooltip.
-            var showTooltip = function (target, position) {
-                var $tip = that.getDomElement();
-
-                // convert tooltip content template to real tipText
-                var tipText = that.stringFormat(that.tooltipOptions.content, target);
-
-                $tip.html(tipText);
-                that.updateTooltipPosition({ x: position.pageX, y: position.pageY });
-                $tip.css({
-                    left: that.tipPosition.x + that.tooltipOptions.shifts.x,
-                    top: that.tipPosition.y + that.tooltipOptions.shifts.y
-                }).show();
-
-                // run callback
-                if (typeof that.tooltipOptions.onHover === 'function') {
-                    that.tooltipOptions.onHover(target, $tip);
-                }
-            };
-
-            // Quick little function for hiding the tooltip.
-            var hideTooltip = function () {
-                that.getDomElement().hide().html('');
-            };
-
             if (item) {
-                showTooltip(item, pos);
+                plot.showTooltip(item, pos);
             } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines.track === true) {
                 var closestTrace = {
                     distance: -1
@@ -184,7 +159,7 @@
                     }
 
                     if (xAfterIndex === -1) {
-                        hideTooltip();
+                        plot.hideTooltip();
                         return;
                     }
 
@@ -223,13 +198,54 @@
                 });
 
                 if (closestTrace.distance !== -1)
-                    showTooltip(closestTrace.item, pos);
+                    plot.showTooltip(closestTrace.item, pos);
                 else
-                    hideTooltip();
+                    plot.hideTooltip();
             } else {
-                hideTooltip();
+                plot.hideTooltip();
             }
         }
+
+	    // Quick little function for setting the tooltip position.
+	    plot.setTooltipPosition = function (pos) {
+	        var $tip = that.getDomElement();
+
+	        var totalTipWidth = $tip.outerWidth() + that.tooltipOptions.shifts.x;
+	        var totalTipHeight = $tip.outerHeight() + that.tooltipOptions.shifts.y;
+	        if ((pos.x - $(window).scrollLeft()) > ($(window)[that.wfunc]() - totalTipWidth)) {
+	            pos.x -= totalTipWidth;
+	        }
+	        if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
+	            pos.y -= totalTipHeight;
+	        }
+	        that.tipPosition.x = pos.x;
+	        that.tipPosition.y = pos.y;
+	    };
+
+	    // Quick little function for showing the tooltip.
+	    plot.showTooltip = function (target, position) {
+	        var $tip = that.getDomElement();
+
+	        // convert tooltip content template to real tipText
+	        var tipText = that.stringFormat(that.tooltipOptions.content, target);
+
+	        $tip.html(tipText);
+	        plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
+	        $tip.css({
+	            left: that.tipPosition.x + that.tooltipOptions.shifts.x,
+	            top: that.tipPosition.y + that.tooltipOptions.shifts.y
+	        }).show();
+
+	        // run callback
+	        if (typeof that.tooltipOptions.onHover === 'function') {
+	            that.tooltipOptions.onHover(target, $tip);
+	        }
+	    };
+
+	    // Quick little function for hiding the tooltip.
+	    plot.hideTooltip = function () {
+	        that.getDomElement().hide().html('');
+	    };
     };
 
     /**
@@ -258,22 +274,6 @@
         }
 
         return $tip;
-    };
-
-    // as the name says
-    FlotTooltip.prototype.updateTooltipPosition = function (pos) {
-        var $tip = $('#' + this.tooltipOptions.id);
-
-        var totalTipWidth = $tip.outerWidth() + this.tooltipOptions.shifts.x;
-        var totalTipHeight = $tip.outerHeight() + this.tooltipOptions.shifts.y;
-        if ((pos.x - $(window).scrollLeft()) > ($(window)[this.wfunc]() - totalTipWidth)) {
-            pos.x -= totalTipWidth;
-        }
-        if ((pos.y - $(window).scrollTop()) > ($(window)[this.hfunc]() - totalTipHeight)) {
-            pos.y -= totalTipHeight;
-        }
-        this.tipPosition.x = pos.x;
-        this.tipPosition.y = pos.y;
     };
 
     /**
@@ -484,7 +484,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.8.3'
+        version: '0.8.4'
     });
 
 })(jQuery);

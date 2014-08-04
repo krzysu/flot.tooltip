@@ -93,7 +93,16 @@ when the pull request is merged and how many other changes were made at the same
 ## Changelog
 
 
-### What's new in v0.8.3?
+### What's new in v0.8.4?
+
+-   merged pull request [#87](https://github.com/krzysu/flot.tooltip/pull/87), adding compatibility with jQuery < 1.2.6
+-   added new API functions to Flot's base plot object:
+    -   `setTooltipPosition(pos)`
+    -   `showTooltip(item, pos)`
+    -   `hideTooltip()`
+-   cleaned a lot of the source code for better maintainability and development
+
+### v0.8.3
 
 -   merged pull requests: [#86](https://github.com/krzysu/flot.tooltip/pull/86), [#85](https://github.com/krzysu/flot.tooltip/pull/85), [#83](https://github.com/krzysu/flot.tooltip/pull/83)
 -   pull request #86 introduced support for showing tooltips when hovering over the lines between points
@@ -234,7 +243,7 @@ From now on also minified version is available.
 -   [@ilvalle](https://github.com/ilvalle) - pull request [#77](https://github.com/krzysu/flot.tooltip/pull/77), added time zone support by using $.plot.dateGenerator
 -   [@willianganzert](https://github.com/willianganzert) - pull request [#83](https://github.com/krzysu/flot.tooltip/pull/83), Add "id" to tooltip element
 -   [@larsenmtl](https://github.com/larsenmtl) - pull request [#85](https://github.com/krzysu/flot.tooltip/pull/85), Support for stacked percent plugin
--   [@RoboterHund](https://github.com/RoboterHund) - pull request [#86](https://github.com/krzysu/flot.tooltip/pull/86), Compatibility fix for older versions of jQuery
+-   [@RoboterHund](https://github.com/RoboterHund) - pull request [#87](https://github.com/krzysu/flot.tooltip/pull/86), Compatibility fix for older versions of jQuery
 
 * * *
 Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
