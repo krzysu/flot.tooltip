@@ -128,14 +128,14 @@
             };
 
             // Quick little function for showing the tooltip.
-            var showTooltip = function (item) {
+            var showTooltip = function (target, position) {
                 var $tip = that.getDomElement();
 
                 // convert tooltip content template to real tipText
-                var tipText = that.stringFormat(that.tooltipOptions.content, item);
+                var tipText = that.stringFormat(that.tooltipOptions.content, target);
 
                 $tip.html(tipText);
-                that.updateTooltipPosition({ x: pos.pageX, y: pos.pageY });
+                that.updateTooltipPosition({ x: position.pageX, y: position.pageY });
                 $tip.css({
                     left: that.tipPosition.x + that.tooltipOptions.shifts.x,
                     top: that.tipPosition.y + that.tooltipOptions.shifts.y
@@ -143,17 +143,17 @@
 
                 // run callback
                 if (typeof that.tooltipOptions.onHover === 'function') {
-                    that.tooltipOptions.onHover(item, $tip);
+                    that.tooltipOptions.onHover(target, $tip);
                 }
-            }
+            };
 
             // Quick little function for hiding the tooltip.
             var hideTooltip = function () {
                 that.getDomElement().hide().html('');
-            }
+            };
 
             if (item) {
-                showTooltip(item);
+                showTooltip(item, pos);
             } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines.track === true) {
                 var closestTrace = {
                     distance: -1
@@ -212,7 +212,7 @@
                 });
 
                 if (closestTrace.distance !== -1)
-                    showTooltip(closestTrace.item);
+                    showTooltip(closestTrace.item, pos);
                 else
                     hideTooltip();
             } else {
