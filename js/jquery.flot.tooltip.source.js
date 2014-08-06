@@ -22,10 +22,7 @@
                 y: 20
             },
             defaultTheme: true,
-            lines: {
-                track: false,
-                threshold: 0.05
-            },
+            lines: false,
 
             // callbacks
             onHover: function (flotItem, $tooltipEl) {},
@@ -129,9 +126,11 @@
 
             if (item) {
                 plot.showTooltip(item, pos);
-            } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines.track === true) {
+            } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines === true) {
+                var maxDistance = that.plotOptions.grid.mouseActiveRadius;
+
                 var closestTrace = {
-                    distance: -1
+                    distance: maxDistance + 1
                 };
 
                 $.each(plot.getData(), function (i, series) {
@@ -155,9 +154,10 @@
                     var pointPrev = { x: series.data[xBeforeIndex][0], y: series.data[xBeforeIndex][1] },
                         pointNext = { x: series.data[xAfterIndex][0], y: series.data[xAfterIndex][1] };
 
-                    var distToLine = dotLineLength(pos.x, pos.y, pointPrev.x, pointPrev.y, pointNext.x, pointNext.y, false);
+                    var distToLine = dotLineLength(series.xaxis.p2c(pos.x), series.yaxis.p2c(pos.y), series.xaxis.p2c(pointPrev.x),
+                        series.yaxis.p2c(pointPrev.y), series.xaxis.p2c(pointNext.x), series.yaxis.p2c(pointNext.y), false);
 
-                    if (distToLine < that.tooltipOptions.lines.threshold) {
+                    if (distToLine < closestTrace.distance) {
 
                         var closestIndex = lineDistance(pointPrev.x, pointPrev.y, pos.x, pos.y) <
                             lineDistance(pos.x, pos.y, pointNext.x, pointNext.y) ? xBeforeIndex : xAfterIndex;
@@ -177,16 +177,14 @@
                             seriesIndex: i
                         };
 
-                        if (closestTrace.distance === -1 || distToLine < closestTrace.distance) {
-                            closestTrace = {
-                                distance: distToLine,
-                                item: item
-                            };
-                        }
+                        closestTrace = {
+                            distance: distToLine,
+                            item: item
+                        };
                     }
                 });
 
-                if (closestTrace.distance !== -1)
+                if (closestTrace.distance < maxDistance + 1)
                     plot.showTooltip(closestTrace.item, pos);
                 else
                     plot.hideTooltip();
