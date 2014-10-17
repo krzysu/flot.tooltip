@@ -1,12 +1,13 @@
 (function ($) {
     // plugin options, default values
     var defaultOptions = {
-        tooltip: false,
-        tooltipOpts: {
+        tooltip: {
+			show: false,
             id: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
+			// %c -> series color,
             // %lx -> x axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %ly -> y axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %x -> X value,
@@ -59,10 +60,10 @@
             that.plotOptions = plot.getOptions();
 
             // if not enabled return
-            if (that.plotOptions.tooltip === false || typeof that.plotOptions.tooltip === 'undefined') return;
+            if (that.plotOptions.tooltip.show === false || typeof that.plotOptions.tooltip.show === 'undefined') return;
 
             // shortcut to access tooltip options
-            that.tooltipOptions = that.plotOptions.tooltipOpts;
+            that.tooltipOptions = that.plotOptions.tooltip;
 
             if (that.tooltipOptions.$compat) {
                 that.wfunc = 'width';
@@ -273,6 +274,7 @@
 
         var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
+		var colorPattern = /%c/;
         var xLabelPattern = /%lx/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var yLabelPattern = /%ly/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var xPattern = /%x\.{0,1}(\d{0,})/;
@@ -325,6 +327,14 @@
         } else {
             //remove %s if label is undefined
             content = content.replace(seriesPattern, "");
+        }
+		
+		// color match
+        if (typeof(item.series.color) !== 'undefined') {
+            content = content.replace(colorPattern, item.series.color);
+        } else {
+            //remove %s if color is undefined
+            content = content.replace(colorPattern, "");
         }
 
         // x axis label match
