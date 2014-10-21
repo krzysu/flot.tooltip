@@ -4,6 +4,7 @@
         tooltip: {
 			show: false,
             id: "flotTip",
+            cssClass: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
@@ -244,7 +245,7 @@
         var $tip = $('#' + this.tooltipOptions.id);
 
         if( $tip.length === 0 ){
-            $tip = $('<div />').attr('id', this.tooltipOptions.id);
+            $tip = $('<div />').attr('id', this.tooltipOptions.id).addClass(this.tooltipOptions.cssClass);
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
             if(this.tooltipOptions.defaultTheme) {
