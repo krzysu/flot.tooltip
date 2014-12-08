@@ -211,10 +211,10 @@
 	        var totalTipWidth = $tip.outerWidth() + that.tooltipOptions.shifts.x;
 	        var totalTipHeight = $tip.outerHeight() + that.tooltipOptions.shifts.y;
 	        if ((pos.x - $(window).scrollLeft()) > ($(window)[that.wfunc]() - totalTipWidth)) {
-	            pos.x -= totalTipWidth;
+	            pos.x -= totalTipWidth + that.tooltipOptions.shifts.x;
 	        }
 	        if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
-	            pos.y -= totalTipHeight;
+	            pos.y -= totalTipHeight + that.tooltipOptions.shifts.y;
 	        }
 	        that.tipPosition.x = pos.x;
 	        that.tipPosition.y = pos.y;
