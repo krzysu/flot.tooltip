@@ -6,18 +6,19 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2014-08-06
+ * build on 2015-05-10
  * released under MIT License, 2012
 */ 
 (function ($) {
     // plugin options, default values
     var defaultOptions = {
-        tooltip: false,
-        tooltipOpts: {
+        tooltip: {
+            show: false,
             id: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
+            // %c -> series color,
             // %lx -> x axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %ly -> y axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %x -> X value,
@@ -70,10 +71,10 @@
             that.plotOptions = plot.getOptions();
 
             // if not enabled return
-            if (that.plotOptions.tooltip === false || typeof that.plotOptions.tooltip === 'undefined') return;
+            if (that.plotOptions.tooltip.show === false || typeof that.plotOptions.tooltip.show === 'undefined') return;
 
             // shortcut to access tooltip options
-            that.tooltipOptions = that.plotOptions.tooltipOpts;
+            that.tooltipOptions = that.plotOptions.tooltip;
 
             if (that.tooltipOptions.$compat) {
                 that.wfunc = 'width';
@@ -204,46 +205,46 @@
             }
         }
 
-	    // Quick little function for setting the tooltip position.
-	    plot.setTooltipPosition = function (pos) {
-	        var $tip = that.getDomElement();
+        // Quick little function for setting the tooltip position.
+        plot.setTooltipPosition = function (pos) {
+            var $tip = that.getDomElement();
 
-	        var totalTipWidth = $tip.outerWidth() + that.tooltipOptions.shifts.x;
-	        var totalTipHeight = $tip.outerHeight() + that.tooltipOptions.shifts.y;
-	        if ((pos.x - $(window).scrollLeft()) > ($(window)[that.wfunc]() - totalTipWidth)) {
-	            pos.x -= totalTipWidth;
-	        }
-	        if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
-	            pos.y -= totalTipHeight;
-	        }
-	        that.tipPosition.x = pos.x;
-	        that.tipPosition.y = pos.y;
-	    };
+            var totalTipWidth = $tip.outerWidth() + that.tooltipOptions.shifts.x;
+            var totalTipHeight = $tip.outerHeight() + that.tooltipOptions.shifts.y;
+            if ((pos.x - $(window).scrollLeft()) > ($(window)[that.wfunc]() - totalTipWidth)) {
+                pos.x -= totalTipWidth;
+            }
+            if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
+                pos.y -= totalTipHeight;
+            }
+            that.tipPosition.x = pos.x;
+            that.tipPosition.y = pos.y;
+        };
 
-	    // Quick little function for showing the tooltip.
-	    plot.showTooltip = function (target, position) {
-	        var $tip = that.getDomElement();
+        // Quick little function for showing the tooltip.
+        plot.showTooltip = function (target, position) {
+            var $tip = that.getDomElement();
 
-	        // convert tooltip content template to real tipText
-	        var tipText = that.stringFormat(that.tooltipOptions.content, target);
+            // convert tooltip content template to real tipText
+            var tipText = that.stringFormat(that.tooltipOptions.content, target);
 
-	        $tip.html(tipText);
-	        plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
-	        $tip.css({
-	            left: that.tipPosition.x + that.tooltipOptions.shifts.x,
-	            top: that.tipPosition.y + that.tooltipOptions.shifts.y
-	        }).show();
+            $tip.html(tipText);
+            plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
+            $tip.css({
+                left: that.tipPosition.x + that.tooltipOptions.shifts.x,
+                top: that.tipPosition.y + that.tooltipOptions.shifts.y
+            }).show();
 
-	        // run callback
-	        if (typeof that.tooltipOptions.onHover === 'function') {
-	            that.tooltipOptions.onHover(target, $tip);
-	        }
-	    };
+            // run callback
+            if (typeof that.tooltipOptions.onHover === 'function') {
+                that.tooltipOptions.onHover(target, $tip);
+            }
+        };
 
-	    // Quick little function for hiding the tooltip.
-	    plot.hideTooltip = function () {
-	        that.getDomElement().hide().html('');
-	    };
+        // Quick little function for hiding the tooltip.
+        plot.hideTooltip = function () {
+            that.getDomElement().hide().html('');
+        };
     };
 
     /**
@@ -284,6 +285,7 @@
 
         var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
+        var colorPattern = /%c/;
         var xLabelPattern = /%lx/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var yLabelPattern = /%ly/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var xPattern = /%x\.{0,1}(\d{0,})/;
@@ -337,6 +339,14 @@
             //remove %s if label is undefined
             content = content.replace(seriesPattern, "");
         }
+        
+        // color match
+        if (typeof(item.series.color) !== 'undefined') {
+            content = content.replace(colorPattern, item.series.color);
+        } else {
+            //remove %s if color is undefined
+            content = content.replace(colorPattern, "");
+        }
 
         // x axis label match
         if (this.hasAxisLabel('xaxis', item)) {
@@ -358,7 +368,7 @@
         if (this.isTimeMode('xaxis', item) && this.isXDateFormat(item)) {
             content = content.replace(xPattern, this.timestampToDate(x, this.tooltipOptions.xDateFormat, item.series.xaxis.options));
         }
-		if (this.isTimeMode('yaxis', item) && this.isYDateFormat(item)) {
+        if (this.isTimeMode('yaxis', item) && this.isYDateFormat(item)) {
             content = content.replace(yPattern, this.timestampToDate(y, this.tooltipOptions.yDateFormat, item.series.yaxis.options));
         }
 
