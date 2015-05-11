@@ -400,10 +400,12 @@
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            if (item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
-                var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
-                if (valueX === x) {
-                    content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+            for (var index in item.series.xaxis[ticks]) {
+                if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
+                    var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
+                    if (valueX === x) {
+                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                    }
                 }
             }
         }
