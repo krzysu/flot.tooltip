@@ -43,10 +43,7 @@ In comments there are default values
             y:          int                     //20
         }
         defaultTheme:   boolean                 //true
-        lines: {
-            track:      boolean                 //false
-            threshold:  number                  //0.05
-        }
+        lines:          boolean                 //false
         onHover:        function(flotItem, $tooltipEl)
         compat:         boolean                 //false
     }
@@ -66,8 +63,7 @@ In comments there are default values
 -   `dayNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
 -   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` (or whatever you set the id option to) in your CSS
--   `lines.track` : whether or not to have a tooltip on hover for lines between points
--   `lines.threshold` : the data-based threshold for the maximum distance from the line to show the tooltip
+-   `lines` : whether or not to have a tooltip on hover for lines between points
 -   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered series
 -   `$compat` : whether or not to use compatibility mode - set this to true if you are using jQuery <1.2.6
 
