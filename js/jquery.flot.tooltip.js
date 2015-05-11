@@ -14,7 +14,7 @@
     var defaultOptions = {
         tooltip: {
             show: false,
-            id: "flotTip",
+            cssClass: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
@@ -227,6 +227,8 @@
 
             // convert tooltip content template to real tipText
             var tipText = that.stringFormat(that.tooltipOptions.content, target);
+            if (tipText === '')
+            	return;
 
             $tip.html(tipText);
             plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
@@ -252,10 +254,10 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function () {
-        var $tip = $('#' + this.tooltipOptions.id);
+        var $tip = $('.' + this.tooltipOptions.cssClass);
 
         if( $tip.length === 0 ){
-            $tip = $('<div />').attr('id', this.tooltipOptions.id);
+            $tip = $('<div />').addClass(this.tooltipOptions.cssClass);
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
             if(this.tooltipOptions.defaultTheme) {
@@ -320,6 +322,11 @@
         // if it is a function callback get the content string
         if (typeof(content) === 'function') {
             content = content(item.series.label, x, y, item);
+        }
+
+        // the case where the passed content is equal to false
+        if (typeof(content) === 'boolean' && !content) {
+            return '';
         }
 
         // percent match for pie charts and stacked percent
@@ -474,12 +481,12 @@
 
     // check if flot-axislabels plugin (https://github.com/markrcote/flot-axislabels) is used and that an axis label is given
     FlotTooltip.prototype.hasAxisLabel = function (axisName, item) {
-        return ($.inArray('axisLabels', this.plotPlugins) !== -1 && typeof item.series[axisName].options.axisLabel !== 'undefined' && item.series[axisName].options.axisLabel.length > 0);
+        return ($.inArray(this.plotPlugins, 'axisLabels') !== -1 && typeof item.series[axisName].options.axisLabel !== 'undefined' && item.series[axisName].options.axisLabel.length > 0);
     };
 
     // check whether flot-tickRotor, a plugin which allows rotation of X-axis ticks, is being used
     FlotTooltip.prototype.hasRotatedXAxisTicks = function (item) {
-        return ($.inArray('tickRotor', this.plotPlugins) !== -1 && typeof item.series.xaxis.rotatedTicks !== 'undefined');
+        return ($.inArray(this.plotPlugins, 'tickRotor') !== -1 && typeof item.series.xaxis.rotatedTicks !== 'undefined');
     };
 
     //

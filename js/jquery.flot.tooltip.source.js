@@ -216,6 +216,8 @@
 
             // convert tooltip content template to real tipText
             var tipText = that.stringFormat(that.tooltipOptions.content, target);
+            if (tipText === '')
+            	return;
 
             $tip.html(tipText);
             plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
@@ -309,6 +311,11 @@
         // if it is a function callback get the content string
         if (typeof(content) === 'function') {
             content = content(item.series.label, x, y, item);
+        }
+
+        // the case where the passed content is equal to false
+        if (typeof(content) === 'boolean' && !content) {
+            return '';
         }
 
         // percent match for pie charts and stacked percent
