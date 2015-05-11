@@ -32,6 +32,9 @@
         }
     };
 
+    // dummy default options object for legacy code (<0.8.5) - is deleted later
+    defaultOptions.tooltipOpts = defaultOptions.tooltip;
+
     // object
     var FlotTooltip = function (plot) {
         // variables
@@ -58,6 +61,13 @@
 
             // get plot options
             that.plotOptions = plot.getOptions();
+
+            // for legacy (<0.8.5) implementations
+            if (typeof(that.plotOptions.tooltip) === 'boolean') {
+                that.plotOptions.tooltipOpts.show = that.plotOptions.tooltip;
+                that.plotOptions.tooltip = that.plotOptions.tooltipOpts;
+                delete that.plotOptions.tooltipOpts;
+            }
 
             // if not enabled return
             if (that.plotOptions.tooltip.show === false || typeof that.plotOptions.tooltip.show === 'undefined') return;
