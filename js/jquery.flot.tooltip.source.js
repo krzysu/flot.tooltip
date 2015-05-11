@@ -3,7 +3,7 @@
     var defaultOptions = {
         tooltip: {
             show: false,
-            id: "flotTip",
+            cssClass: "flotTip",
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
@@ -241,10 +241,10 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function () {
-        var $tip = $('#' + this.tooltipOptions.id);
+        var $tip = $('.' + this.tooltipOptions.cssClass);
 
         if( $tip.length === 0 ){
-            $tip = $('<div />').attr('id', this.tooltipOptions.id);
+            $tip = $('<div />').addClass(this.tooltipOptions.cssClass);
             $tip.appendTo('body').hide().css({position: 'absolute'});
 
             if(this.tooltipOptions.defaultTheme) {
