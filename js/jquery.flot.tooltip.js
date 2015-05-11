@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.8.4
+ * version: 0.8.5
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-05-10
+ * build on 2015-05-11
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -43,6 +43,9 @@
         }
     };
 
+    // dummy default options object for legacy code (<0.8.5) - is deleted later
+    defaultOptions.tooltipOpts = defaultOptions.tooltip;
+
     // object
     var FlotTooltip = function (plot) {
         // variables
@@ -69,6 +72,13 @@
 
             // get plot options
             that.plotOptions = plot.getOptions();
+
+            // for legacy (<0.8.5) implementations
+            if (typeof(that.plotOptions.tooltip) === 'boolean') {
+                that.plotOptions.tooltipOpts.show = that.plotOptions.tooltip;
+                that.plotOptions.tooltip = that.plotOptions.tooltipOpts;
+                delete that.plotOptions.tooltipOpts;
+            }
 
             // if not enabled return
             if (that.plotOptions.tooltip.show === false || typeof that.plotOptions.tooltip.show === 'undefined') return;
@@ -401,10 +411,12 @@
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            if (item.series.xaxis[ticks].length > tickIndex && !this.isTimeMode('xaxis', item)) {
-                var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
-                if (valueX === x) {
-                    content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+            for (var index in item.series.xaxis[ticks]) {
+                if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
+                    var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
+                    if (valueX === x) {
+                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                    }
                 }
             }
         }
@@ -499,7 +511,7 @@
         init: init,
         options: defaultOptions,
         name: 'tooltip',
-        version: '0.8.4'
+        version: '0.8.5'
     });
 
 })(jQuery);

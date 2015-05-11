@@ -30,9 +30,9 @@ __Important!__ You need to set flot option `hoverable` to `true` if you want flo
 
 In comments there are default values  
 
-    tooltip:            boolean                 //false
-    tooltipOpts: {
-        id:             string                  //"flotTip"
+    tooltip: {
+        show:           boolean                 //false
+        cssClass:       string                  //"flotTip"
         content:        string or function      //"%s | X: %x | Y: %y"
         xDateFormat:    string                  //null
         yDateFormat:    string                  //null
@@ -45,16 +45,17 @@ In comments there are default values
         defaultTheme:   boolean                 //true
         lines:          boolean                 //false
         onHover:        function(flotItem, $tooltipEl)
-        compat:         boolean                 //false
+        $compat:        boolean                 //false
     }
 
 
--   `tooltip` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
--   `id` : the id to assign to the tooltip's HTML DIV element, defaulted to "flotTip" 
+-   `show` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
+-   `cssClass` : the class to assign to the tooltip's HTML DIV element, defaulted to "flotTip" 
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
-	With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.   
+  With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.  
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
   If you require even more control over how the tooltip is generated you can pass a callback `function(label, xval, yval, flotItem)` that must return a string with the format described.  
+  The content callback function pass may also return a boolean value of false (or empty string) if the tooltip is to be hidden for the given data point.
   Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `%lx` and `%ly`, that work with flot-axislabels plugin.  
   Pull request [#75](https://github.com/krzysu/flot.tooltip/pull/75) introduced `%ct` placeholder for any custom text withing label (see example in `examples/custom-label-text.html`)  
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
@@ -89,7 +90,17 @@ when the pull request is merged and how many other changes were made at the same
 ## Changelog
 
 
-### What's new in v0.8.4?
+### What's new in v0.8.5?
+
+-   IMPORTANT NOTE A: while a legacy check exists, the options object format has changed to be a single object `tooltip` with a property `show` (defaulted to false).  The legacy check may not always exist, so it may be a good idea to update your production code.
+-   IMPORTANT NOTE B: while there's a legacy check for the options object, there is not one for the id-to-class change (see below).  This change will be far less relevant to developers, as it only matters when adding custom CSS styling.  If your implementation does so, make sure you change your selectors with the new version!
+-   merged pull requests: [#95](https://github.com/krzysu/flot.tooltip/pull/95), [#98](https://github.com/krzysu/flot.tooltip/pull/98), [#99](https://github.com/krzysu/flot.tooltip/pull/99), [#103](https://github.com/krzysu/flot.tooltip/pull/103)
+-   corrected some errors in the documentation
+-   improved line tracking feature - now utilizes flot's plot object's grid.mouseActiveRadius option for threshold and is based off pixel distance instead of data.
+-   changed the id option to cssClass instead.  This means the option is now cssClass instead of id, and will (obviously) be assigned as a class instead of an id.  Therefore, any relevant CSS selectors need to be changed as well.
+-   added fix that should allow x axis value to work properly in some multiple-series implementations
+
+### v0.8.4
 
 -   merged pull request [#87](https://github.com/krzysu/flot.tooltip/pull/87), adding compatibility with jQuery < 1.2.6
 -   added new API functions to Flot's base plot object:
