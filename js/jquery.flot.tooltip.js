@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-05-11
+ * build on 2015-05-28
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -34,6 +34,7 @@
                 y: 20
             },
             defaultTheme: true,
+            snap: true,
             lines: false,
 
             // callbacks
@@ -147,13 +148,16 @@
             };
 
             if (item) {
-                plot.showTooltip(item, pos);
+                var ttPos = that.tooltipOptions.snap ? item : pos;
+                plot.showTooltip(item, ttPos);
             } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines === true) {
                 var maxDistance = that.plotOptions.grid.mouseActiveRadius;
 
                 var closestTrace = {
                     distance: maxDistance + 1
                 };
+
+                var ttPos = pos;
 
                 $.each(plot.getData(), function (i, series) {
                     var xBeforeIndex = 0,
@@ -203,11 +207,18 @@
                             distance: distToLine,
                             item: item
                         };
+
+                        if (that.tooltipOptions.snap) {
+                            ttPos = {
+                                pageX: series.xaxis.p2c(pointOnLine[0]),
+                                pageY: series.yaxis.p2c(pointOnLine[1])
+                            };
+                        }
                     }
                 });
 
                 if (closestTrace.distance < maxDistance + 1)
-                    plot.showTooltip(closestTrace.item, pos);
+                    plot.showTooltip(closestTrace.item, ttPos);
                 else
                     plot.hideTooltip();
             } else {
@@ -232,13 +243,13 @@
         };
 
         // Quick little function for showing the tooltip.
-        plot.showTooltip = function (target, position) {
+        plot.showTooltip = function (target, position, targetPosition) {
             var $tip = that.getDomElement();
 
             // convert tooltip content template to real tipText
             var tipText = that.stringFormat(that.tooltipOptions.content, target);
             if (tipText === '')
-            	return;
+                return;
 
             $tip.html(tipText);
             plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
