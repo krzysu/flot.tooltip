@@ -137,8 +137,7 @@
             };
 
             if (item) {
-                var ttPos = that.tooltipOptions.snap ? item : pos;
-                plot.showTooltip(item, ttPos);
+                plot.showTooltip(item, that.tooltipOptions.snap ? item : pos);
             } else if (that.plotOptions.series.lines.show && that.tooltipOptions.lines === true) {
                 var maxDistance = that.plotOptions.grid.mouseActiveRadius;
 
@@ -411,7 +410,7 @@
             // see https://github.com/krzysu/flot.tooltip/issues/65
             var tickIndex = item.dataIndex + item.seriesIndex;
 
-            for (var index in item.series.xaxis[ticks]) {
+            for (var xIndex in item.series.xaxis[ticks]) {
                 if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
                     var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
                     if (valueX === x) {
@@ -423,11 +422,11 @@
 
         // change y from number to given label, if given
         if (typeof item.series.yaxis.ticks !== 'undefined') {
-            for (var index in item.series.yaxis.ticks) {
-                if (item.series.yaxis.ticks.hasOwnProperty(index)) {
-                    var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[index].label : item.series.yaxis.ticks[index].v;
+            for (var yIndex in item.series.yaxis.ticks) {
+                if (item.series.yaxis.ticks.hasOwnProperty(yIndex)) {
+                    var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[yIndex].label : item.series.yaxis.ticks[yIndex].v;
                     if (valueY === y) {
-                        content = content.replace(yPattern, item.series.yaxis.ticks[index].label);
+                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label);
                     }
                 }
             }
