@@ -349,7 +349,7 @@
             content = this.adjustValPrecision(percentPattern, content, p);
         }
 
-	//experiment: adding %n to pie charts
+	// replace %n with number of items represented by slice in pie charts
 	if (item.series.hasOwnProperty('pie')) {
 	    if (typeof (item.series.data[0][1] !== 'undefined')) {
 		n = item.series.data[0][1];

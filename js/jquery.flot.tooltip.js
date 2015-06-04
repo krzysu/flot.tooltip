@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-06-03
+ * build on 2015-06-04
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -360,7 +360,7 @@
             content = this.adjustValPrecision(percentPattern, content, p);
         }
 
-	//experiment: adding %n to pie charts
+	// replace %n with number of items represented by slice in pie charts
 	if (item.series.hasOwnProperty('pie')) {
 	    if (typeof (item.series.data[0][1] !== 'undefined')) {
 		n = item.series.data[0][1];
