@@ -350,8 +350,10 @@
         }
 
 	//experiment: adding %n to pie charts
-	if ((typeof (item.series.data[0][1] !== 'undefined')) && (item.series.pie.show === true)) {
-	    n = item.series.data[0][1];
+	if (item.series.hasOwnProperty('pie')) {
+	    if (typeof (item.series.data[0][1] !== 'undefined')) {
+		n = item.series.data[0][1];
+	    }
 	}
 	if (typeof n === 'number') {
             content = content.replace(nPiePattern, n);
