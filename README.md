@@ -76,6 +76,7 @@ In comments there are default values
 -   [axislabels](https://github.com/markrcote/flot-axislabels)
 -   [tickRotor](https://github.com/markrcote/flot-tickrotor)
 -   [stackpercent](https://github.com/skeleton9/flot.stackpercent)
+-   [time] (http://www.flotcharts.org/flot/examples/axes-time/index.html)
 
 ## For developers/contributors
 
