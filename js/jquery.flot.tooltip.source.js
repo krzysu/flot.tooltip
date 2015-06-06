@@ -14,6 +14,7 @@
             // %y -> Y value,
             // %x.2 -> precision of X value,
             // %p -> percent
+	    // %n -> value (not percent) of pie chart
             xDateFormat: null,
             yDateFormat: null,
             monthNames: null,
@@ -293,7 +294,6 @@
      * @return {string} real tooltip content for current item
      */
     FlotTooltip.prototype.stringFormat = function (content, item) {
-
         var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
         var colorPattern = /%c/;
@@ -304,8 +304,9 @@
         var xPatternWithoutPrecision = "%x";
         var yPatternWithoutPrecision = "%y";
         var customTextPattern = "%ct";
-
-        var x, y, customText, p;
+	var nPiePattern = "%n";
+	
+        var x, y, customText, p, n;
 
         // for threshold plugin we need to read data from different place
         if (typeof item.series.threshold !== "undefined") {
@@ -348,6 +349,16 @@
             content = this.adjustValPrecision(percentPattern, content, p);
         }
 
+	// replace %n with number of items represented by slice in pie charts
+	if (item.series.hasOwnProperty('pie')) {
+	    if (typeof (item.series.data[0][1] !== 'undefined')) {
+		n = item.series.data[0][1];
+	    }
+	}
+	if (typeof n === 'number') {
+            content = content.replace(nPiePattern, n);
+	}
+	
         // series match
         if (typeof(item.series.label) !== 'undefined') {
             content = content.replace(seriesPattern, item.series.label);
