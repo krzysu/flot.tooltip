@@ -339,6 +339,13 @@
             return '';
         }
 
+	/* replacement of %ct and other multi-character templates must
+	   precede the replacement of single-character templates 
+	   to avoid conflict between '%c' and '%ct'  and similar substrings
+	*/
+	if (customText)
+            content = content.replace(customTextPattern, customText);
+
         // percent match for pie charts and stacked percent
         if (typeof (item.series.percent) !== 'undefined') {
             p = item.series.percent;
@@ -452,9 +459,6 @@
             //escape dollar
             content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
         }
-
-        if (customText)
-            content = content.replace(customTextPattern, customText);
 
         return content;
     };
