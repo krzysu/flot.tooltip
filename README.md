@@ -58,6 +58,7 @@ In comments there are default values
   The content callback function pass may also return a boolean value of false (or empty string) if the tooltip is to be hidden for the given data point.
   Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `%lx` and `%ly`, that work with flot-axislabels plugin.  
   Pull request [#75](https://github.com/krzysu/flot.tooltip/pull/75) introduced `%ct` placeholder for any custom text withing label (see example in `examples/custom-label-text.html`)  
+  Pull request [#112](https://github.com/krzysu/flot.tooltip/pull/112) introduced `%n` placeholder for the total number (rather than percent) represented by a single slice of a pie chart. 
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
