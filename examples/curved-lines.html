@@ -18,8 +18,10 @@
 
       //flot options
       var options = {
+      legend: { show: false },
       series: {
-      curvedLines: {active: true, nrSplinePoints: 5}
+      label: "Curved Lines Test",
+      curvedLines: {active: true, nrSplinePoints: 20}
       },
       grid: { hoverable: true }, //important! flot.tooltip requires this
       tooltip: {
