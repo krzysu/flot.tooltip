@@ -5,7 +5,7 @@ For information about Flot library [go here](http://www.flotcharts.org/).
 
 Works also with Time series data and supports Date formatting in the same way as Flot itself.
 You can fully define content of tip (with values precision) and you can use HTML tags too.
-Flot Tooltip can be easily customized with CSS. Just do what you want with `#flotTip` in your stylesheet.
+Flot Tooltip can be easily customized with CSS. Just do what you want with `.flotTip` in your stylesheet.
 
 Check `examples` folder for details of how to use it.
 
@@ -58,12 +58,13 @@ In comments there are default values
   The content callback function pass may also return a boolean value of false (or empty string) if the tooltip is to be hidden for the given data point.
   Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `%lx` and `%ly`, that work with flot-axislabels plugin.  
   Pull request [#75](https://github.com/krzysu/flot.tooltip/pull/75) introduced `%ct` placeholder for any custom text withing label (see example in `examples/custom-label-text.html`)  
+  Pull request [#112](https://github.com/krzysu/flot.tooltip/pull/112) introduced `%n` placeholder for the total number (rather than percent) represented by a single slice of a pie chart. 
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
 -   `dayNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
 -   `shifts` : shift tooltip position regarding mouse pointer for `x` and `y`, negative values are ok
--   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `#flotTip` (or whatever you set the id option to) in your CSS
+-   `defaultTheme` : plugin have default theme build-in but here you can switch it off and adjust look of tip styling `.flotTip` (or whatever you set the `class` parameter to) in your CSS
 -   `lines` : whether or not to have a tooltip on hover for lines between points
 -   `onHover` : callback that allows you i.e. change color of the border of the tooltip according to the currently hovered series
 -   `$compat` : whether or not to use compatibility mode - set this to true if you are using jQuery <1.2.6
