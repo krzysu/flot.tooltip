@@ -19,7 +19,7 @@
       //flot options
       var options = {
       series: {
-      curvedLines: {active: true}
+      curvedLines: {active: true, nrSplinePoints: 5}
       },
       grid: { hoverable: true }, //important! flot.tooltip requires this
       tooltip: {
@@ -37,14 +37,13 @@
       //curve the line  (old pre 1.0.0 plotting function)
       curvedLines: {
       apply: true,
-      legacyOverride: true// <- use legacy plotting function
-                                 }
-                                 }, {
-                                 data: d1,
-                                 points: { show: true }
-                                 }
-                                 ], options);
-                                 });
+      }
+      }, {
+      data: d1,
+      points: { show: true }
+      }
+      ], options);
+      });
                                  </script>
   </head>
 
