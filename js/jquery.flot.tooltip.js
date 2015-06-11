@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-06-05
+ * build on 2015-06-11
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -329,7 +329,27 @@
             y = item.series.datapoints.points[item.dataIndex * 2 + 1];
             // TODO: where to find custom text in this variant?
             customText = "";
-        } else {
+        } else if (typeof item.series.curvedLines !== "undefined") {
+	    //splines are the in-between point locations in the CurvedLines.js
+	    var splineIndex = item.dataIndex;
+	    pointArray = item.series.datapoints.points;
+	    var pairs = [];
+	    /*
+	      the pointArray is a sequence of triplets: 
+	      an x-value, a y-value, and a zero
+	      this 'for' loop reads the x and y, then records them on the zero
+	     */
+	    for (var i = 0; i< pointArray.length; i++) {
+		if ((i+3) % 3 === 0)
+		    this_x = pointArray[i];
+		else if ((i+3) % 3 == 1) 
+		    this_y = pointArray[i];
+		else // every third value is an irrelevant zero
+		    pairs.push([this_x,this_y]);
+	    }
+	    x = pairs[splineIndex][0];
+	    y = pairs[splineIndex][1];
+	} else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
             customText = item.series.data[item.dataIndex][2];
