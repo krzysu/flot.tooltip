@@ -313,12 +313,10 @@
             x = item.datapoint[0];
             y = item.datapoint[1];
             customText = item.datapoint[2];
-        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
-            x = item.series.datapoints.points[item.dataIndex * 2];
-            y = item.series.datapoints.points[item.dataIndex * 2 + 1];
-            // TODO: where to find custom text in this variant?
-            customText = "";
-        } else if (typeof item.series.curvedLines !== "undefined") {
+        }
+
+	// for CurvedLines plugin we need to read data from different place
+	else if (typeof item.series.curvedLines !== "undefined") {
 	    if (item.datapoint.length === 2) { //if a 'real' datapoint
 		x = item.datapoint[0];
 		y = item.datapoint[1];
@@ -342,7 +340,17 @@
 		}
 		x = pairs[splineIndex][0];
 		y = pairs[splineIndex][1];
+
+		// added interpolation notice; could this be optional?
+		content = content + " (Interpolated Point)";
 	    }
+        }
+
+	else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+            x = item.series.datapoints.points[item.dataIndex * 2];
+            y = item.series.datapoints.points[item.dataIndex * 2 + 1];
+            // TODO: where to find custom text in this variant?
+            customText = "";
 	} else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
