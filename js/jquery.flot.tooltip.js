@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-06-05
+ * build on 2015-06-07
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -238,8 +238,29 @@
             if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
                 pos.y -= totalTipHeight;
             }
-            that.tipPosition.x = pos.x;
-            that.tipPosition.y = pos.y;
+
+	    /* 
+	       The section applies the new positioning ONLY if pos.x and pos.y
+	       are numbers. If they are undefined or not a number, use the last
+	       known numerical position. This hack fixes a bug that kept pie 
+	       charts from keeping their tooltip positioning.
+	     */
+	    
+            if (isNaN(pos.x)) {
+		that.tipPosition.x = that.tipPosition.xPrev;
+	    }
+	    else {
+		that.tipPosition.x = pos.x;
+		that.tipPosition.xPrev = pos.x;
+	    }
+	    if (isNaN(pos.y)) {
+		that.tipPosition.y = that.tipPosition.yPrev;
+	    }
+	    else {
+		that.tipPosition.y = pos.y;
+		that.tipPosition.yPrev = pos.y;
+	    }
+	    
         };
 
         // Quick little function for showing the tooltip.
