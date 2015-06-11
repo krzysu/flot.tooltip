@@ -227,29 +227,8 @@
             if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
                 pos.y -= totalTipHeight;
             }
-
-	    /* 
-	       The section applies the new positioning ONLY if pos.x and pos.y
-	       are numbers. If they are undefined or not a number, use the last
-	       known numerical position. This hack fixes a bug that kept pie 
-	       charts from keeping their tooltip positioning.
-	     */
-	    
-            if (isNaN(pos.x)) {
-		that.tipPosition.x = that.tipPosition.xPrev;
-	    }
-	    else {
-		that.tipPosition.x = pos.x;
-		that.tipPosition.xPrev = pos.x;
-	    }
-	    if (isNaN(pos.y)) {
-		that.tipPosition.y = that.tipPosition.yPrev;
-	    }
-	    else {
-		that.tipPosition.y = pos.y;
-		that.tipPosition.yPrev = pos.y;
-	    }
-	    
+            that.tipPosition.x = pos.x;
+            that.tipPosition.y = pos.y;
         };
 
         // Quick little function for showing the tooltip.
