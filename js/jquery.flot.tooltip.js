@@ -238,8 +238,29 @@
             if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
                 pos.y -= totalTipHeight;
             }
-            that.tipPosition.x = pos.x;
-            that.tipPosition.y = pos.y;
+
+	    /* 
+	       The section applies the new positioning ONLY if pos.x and pos.y
+	       are numbers. If they are undefined or not a number, use the last
+	       known numerical position. This hack fixes a bug that kept pie 
+	       charts from keeping their tooltip positioning.
+	     */
+	    
+            if (isNaN(pos.x)) {
+		that.tipPosition.x = that.tipPosition.xPrev;
+	    }
+	    else {
+		that.tipPosition.x = pos.x;
+		that.tipPosition.xPrev = pos.x;
+	    }
+	    if (isNaN(pos.y)) {
+		that.tipPosition.y = that.tipPosition.yPrev;
+	    }
+	    else {
+		that.tipPosition.y = pos.y;
+		that.tipPosition.yPrev = pos.y;
+	    }
+	    
         };
 
         // Quick little function for showing the tooltip.
@@ -324,22 +345,20 @@
             x = item.datapoint[0];
             y = item.datapoint[1];
             customText = item.datapoint[2];
-        }
-	
-	// for CurvedLines plugin we need to read data from different place
-	else if (typeof item.series.curvedLines !== "undefined") {
-	    console.log("One item coming up!");
-	    console.log(item);
-	    x = item.datapoint[0];
-	    y = item.datapoint[1];
-        }
+	}
 
-	else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+	// for CurvedLines plugin we need to read data from different place
+	    else if (typeof item.series.curvedLines !== "undefined") {
+		x = item.datapoint[0];
+		y = item.datapoint[1];
+	    }
+	    
+        else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
             x = item.series.datapoints.points[item.dataIndex * 2];
             y = item.series.datapoints.points[item.dataIndex * 2 + 1];
             // TODO: where to find custom text in this variant?
             customText = "";
-	} else {
+        } else {
             x = item.series.data[item.dataIndex][0];
             y = item.series.data[item.dataIndex][1];
             customText = item.series.data[item.dataIndex][2];
