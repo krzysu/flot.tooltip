@@ -314,36 +314,13 @@
             y = item.datapoint[1];
             customText = item.datapoint[2];
         }
-
+	
 	// for CurvedLines plugin we need to read data from different place
 	else if (typeof item.series.curvedLines !== "undefined") {
-	    if (item.datapoint.length === 2) { //if a 'real' datapoint
-		x = item.datapoint[0];
-		y = item.datapoint[1];
-	    } else { 
-		//splines are interpolated points the CurvedLines.js
-		var splineIndex = item.dataIndex;
-		pointArray = item.series.datapoints.points;
-	    var pairs = [];
-		/*
-		  the pointArray is a sequence of triplets: 
-		  an x-value, a y-value, and a zero
-		  this 'for' loop reads the x and y, then records them on the zero
-		*/
-		for (var i = 0; i< pointArray.length; i++) {
-		    if ((i+3) % 3 === 0)
-			this_x = pointArray[i];
-		    else if ((i+3) % 3 == 1) 
-			this_y = pointArray[i];
-		    else // every third value is an irrelevant zero
-			pairs.push([this_x,this_y]);
-		}
-		x = pairs[splineIndex][0];
-		y = pairs[splineIndex][1];
-
-		// added interpolation notice; could this be optional?
-		content = content + " (Interpolated Point)";
-	    }
+	    console.log("One item coming up!");
+	    console.log(item);
+	    x = item.datapoint[0];
+	    y = item.datapoint[1];
         }
 
 	else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
