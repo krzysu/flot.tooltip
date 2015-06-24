@@ -78,6 +78,7 @@ In comments there are default values
 -   [tickRotor](https://github.com/markrcote/flot-tickrotor)
 -   [stackpercent](https://github.com/skeleton9/flot.stackpercent)
 -   [time] (http://www.flotcharts.org/flot/examples/axes-time/index.html)
+-   [curvedLines] (http://curvedlines.michaelzinsmaier.de/) 
 
 ## For developers/contributors
 

@@ -334,7 +334,15 @@
             x = item.datapoint[0];
             y = item.datapoint[1];
             customText = item.datapoint[2];
-        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+	}
+
+	// for CurvedLines plugin we need to read data from different place
+	    else if (typeof item.series.curvedLines !== "undefined") {
+		x = item.datapoint[0];
+		y = item.datapoint[1];
+	    }
+	    
+        else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
             x = item.series.datapoints.points[item.dataIndex * 2];
             y = item.series.datapoints.points[item.dataIndex * 2 + 1];
             // TODO: where to find custom text in this variant?

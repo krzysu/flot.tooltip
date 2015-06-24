@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-06-07
+ * build on 2015-06-12
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -345,7 +345,15 @@
             x = item.datapoint[0];
             y = item.datapoint[1];
             customText = item.datapoint[2];
-        } else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
+	}
+
+	// for CurvedLines plugin we need to read data from different place
+	    else if (typeof item.series.curvedLines !== "undefined") {
+		x = item.datapoint[0];
+		y = item.datapoint[1];
+	    }
+	    
+        else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
             x = item.series.datapoints.points[item.dataIndex * 2];
             y = item.series.datapoints.points[item.dataIndex * 2 + 1];
             // TODO: where to find custom text in this variant?
