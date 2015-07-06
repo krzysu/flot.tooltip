@@ -340,6 +340,19 @@
 	    else if (typeof item.series.curvedLines !== "undefined") {
 		x = item.datapoint[0];
 		y = item.datapoint[1];
+
+		// differentiate between real and interpolated data points
+		pointStr = x +'-' +y;
+		var pointsArr = [];
+		for (var i=0; i<item.series.data.length; i++ ) {
+		    pointsArr.push(item.series.data[i][0] + '-' + item.series.data[i][1]);
+		}
+		if (pointsArr.indexOf(pointStr)<0) {
+		    content = content + " (Interpolated Point)";
+		}
+		else {
+		    content = content + " (Real Data Point)";
+		}
 	    }
 	    
         else if (typeof item.series.lines !== "undefined" && item.series.lines.steps) {
