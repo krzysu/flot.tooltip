@@ -6,7 +6,7 @@
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-07-06
+ * build on 2015-07-16
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -37,7 +37,8 @@
             defaultTheme: true,
             snap: true,
             lines: false,
-
+	    showRealVsInterpolatedData: false, // used with curvedLines plugin
+	    
             // callbacks
             onHover: function (flotItem, $tooltipEl) {},
 
@@ -351,18 +352,20 @@
 	    else if (typeof item.series.curvedLines !== "undefined") {
 		x = item.datapoint[0];
 		y = item.datapoint[1];
-
+		
 		// differentiate between real and interpolated data points
-		pointStr = x +'-' +y;
-		var pointsArr = [];
-		for (var i=0; i<item.series.data.length; i++ ) {
-		    pointsArr.push(item.series.data[i][0] + '-' + item.series.data[i][1]);
-		}
-		if (pointsArr.indexOf(pointStr)<0) {
-		    content = content + " (Interpolated Point)";
-		}
-		else {
-		    content = content + " (Real Data Point)";
+		if(this.tooltipOptions.showRealVsInterpolatedData){
+		    pointStr = x +'-' +y;
+		    var pointsArr = [];
+		    for (var i=0; i<item.series.data.length; i++ ) {
+			pointsArr.push(item.series.data[i][0] + '-' + item.series.data[i][1]);
+		    }
+		    if (pointsArr.indexOf(pointStr)<0) {
+			content = content + " (Interpolated Point)";
+		    }
+		    else {
+			content = content + " (Real Data Point)";
+		    }
 		}
 	    }
 	    
