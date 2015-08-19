@@ -6,6 +6,8 @@
   "directories": {
     "example": "examples"
   },
+  "main": "./js/jquery.flot.tooltip.js",
+  "browser": "./js/jquery.flot.tooltip.js",
   "dependencies": {},
   "devDependencies": {
     "grunt": "latest",
