@@ -26,6 +26,7 @@
             defaultTheme: true,
             snap: true,
             lines: false,
+            clickTips: false,
 
             // callbacks
             onHover: function (flotItem, $tooltipEl) {},
@@ -90,12 +91,17 @@
 
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", plothover);
+            if (that.tooltipOptions.clickTips) {
+                $( plot.getPlaceholder() ).bind("plotclick", plotclick);
+            }
+            that.clickmode = false;
 
             $(eventHolder).bind('mousemove', mouseMove);
         });
 
         plot.hooks.shutdown.push(function (plot, eventHolder){
             $(plot.getPlaceholder()).unbind("plothover", plothover);
+            $(plot.getPlaceholder()).unbind("plotclick", plotclick);
             $(eventHolder).unbind("mousemove", mouseMove);
         });
 
@@ -104,6 +110,25 @@
             pos.x = e.pageX;
             pos.y = e.pageY;
             plot.setTooltipPosition(pos);
+        }
+
+        /**
+         *  open the tooltip (if not already open) and freeze it on the current position till the next click
+         */
+        function plotclick(event, pos, item) {
+            if (! that.clickmode) {
+                // it is the click activating the clicktip
+                plothover(event, pos, item);
+                if (that.getDomElement().is(":visible")) {
+                    $(plot.getPlaceholder()).unbind("plothover", plothover);
+                    that.clickmode = true;
+                }
+            } else {
+                // it is the click deactivating the clicktip
+                $( plot.getPlaceholder() ).bind("plothover", plothover);
+                plot.hideTooltip();
+                that.clickmode = false;
+            }
         }
 
         function plothover(event, pos, item) {
