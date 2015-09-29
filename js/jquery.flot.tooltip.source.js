@@ -102,6 +102,7 @@
         plot.hooks.shutdown.push(function (plot, eventHolder){
             $(plot.getPlaceholder()).unbind("plothover", plothover);
             $(plot.getPlaceholder()).unbind("plotclick", plotclick);
+            plot.removeTooltip();
             $(eventHolder).unbind("mousemove", mouseMove);
         });
 
@@ -302,6 +303,10 @@
         // Quick little function for hiding the tooltip.
         plot.hideTooltip = function () {
             that.getDomElement().hide().html('');
+        };
+
+        plot.removeTooltip = function() {
+            that.getDomElement().remove();
         };
     };
 
