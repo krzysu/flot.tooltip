@@ -491,7 +491,7 @@
                 if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
                     var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
                     if (valueX === x) {
-                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label.replace(/\$/g, '$$$$'));
                     }
                 }
             }
@@ -503,7 +503,7 @@
                 if (item.series.yaxis.ticks.hasOwnProperty(yIndex)) {
                     var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[yIndex].label : item.series.yaxis.ticks[yIndex].v;
                     if (valueY === y) {
-                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label);
+                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label.replace(/\$/g, '$$$$'));
                     }
                 }
             }
