@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.8.5
+ * version: 0.8.6
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2015-06-12
+ * build on 2016-02-25
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -37,6 +37,7 @@
             defaultTheme: true,
             snap: true,
             lines: false,
+            clickTips: false,
 
             // callbacks
             onHover: function (flotItem, $tooltipEl) {},
@@ -101,12 +102,18 @@
 
             // bind event
             $( plot.getPlaceholder() ).bind("plothover", plothover);
+            if (that.tooltipOptions.clickTips) {
+                $( plot.getPlaceholder() ).bind("plotclick", plotclick);
+            }
+            that.clickmode = false;
 
             $(eventHolder).bind('mousemove', mouseMove);
         });
 
         plot.hooks.shutdown.push(function (plot, eventHolder){
             $(plot.getPlaceholder()).unbind("plothover", plothover);
+            $(plot.getPlaceholder()).unbind("plotclick", plotclick);
+            plot.removeTooltip();
             $(eventHolder).unbind("mousemove", mouseMove);
         });
 
@@ -115,6 +122,25 @@
             pos.x = e.pageX;
             pos.y = e.pageY;
             plot.setTooltipPosition(pos);
+        }
+
+        /**
+         *  open the tooltip (if not already open) and freeze it on the current position till the next click
+         */
+        function plotclick(event, pos, item) {
+            if (! that.clickmode) {
+                // it is the click activating the clicktip
+                plothover(event, pos, item);
+                if (that.getDomElement().is(":visible")) {
+                    $(plot.getPlaceholder()).unbind("plothover", plothover);
+                    that.clickmode = true;
+                }
+            } else {
+                // it is the click deactivating the clicktip
+                $( plot.getPlaceholder() ).bind("plothover", plothover);
+                plot.hideTooltip();
+                that.clickmode = false;
+            }
         }
 
         function plothover(event, pos, item) {
@@ -288,6 +314,10 @@
         // Quick little function for hiding the tooltip.
         plot.hideTooltip = function () {
             that.getDomElement().hide().html('');
+        };
+
+        plot.removeTooltip = function() {
+            that.getDomElement().remove();
         };
     };
 
@@ -472,7 +502,7 @@
                 if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
                     var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
                     if (valueX === x) {
-                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label);
+                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label.replace(/\$/g, '$$$$'));
                     }
                 }
             }
@@ -484,7 +514,7 @@
                 if (item.series.yaxis.ticks.hasOwnProperty(yIndex)) {
                     var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[yIndex].label : item.series.yaxis.ticks[yIndex].v;
                     if (valueY === y) {
-                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label);
+                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label.replace(/\$/g, '$$$$'));
                     }
                 }
             }
