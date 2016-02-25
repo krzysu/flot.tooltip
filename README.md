@@ -92,8 +92,11 @@ when the pull request is merged and how many other changes were made at the same
 
 ## Changelog
 
+### v0.8.6
 
-### What's new in v0.8.5?
+-   pull requests from the community since May 2015
+
+### v0.8.5
 
 -   IMPORTANT NOTE A: while a legacy check exists, the options object format has changed to be a single object `tooltip` with a property `show` (defaulted to false).  The legacy check may not always exist, so it may be a good idea to update your production code.
 -   IMPORTANT NOTE B: while there's a legacy check for the options object, there is not one for the id-to-class change (see below).  This change will be far less relevant to developers, as it only matters when adding custom CSS styling.  If your implementation does so, make sure you change your selectors with the new version!
