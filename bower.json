@@ -1,6 +1,6 @@
 {
   "name": "flot.tooltip",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "license": "MIT",
   "main": "js/jquery.flot.tooltip.js",
   "ignore": [

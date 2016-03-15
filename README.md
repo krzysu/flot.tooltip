@@ -23,7 +23,7 @@ You can also use bower package manager:
 __Important!__ You need to set flot option `hoverable` to `true` if you want flot.tooltip plugin to work.
 
     grid: {
-      hoverable: true 
+      hoverable: true
     }
 
 ### Plugin Options
@@ -50,7 +50,7 @@ In comments there are default values
 
 
 -   `show` : set to `true` to turn on this plugin (if `grid.hoverable` is also set to `true`)
--   `cssClass` : the class to assign to the tooltip's HTML DIV element, defaulted to "flotTip" 
+-   `cssClass` : the class to assign to the tooltip's HTML DIV element, defaulted to "flotTip"
 -   `content` : content of your tooltip, HTML tags are also allowed; use `%s` for series label, `%x` for X value, `%y` for Y value and `%p` for percentage value (useful with pie charts using flot.pie plugin)  
   With `%x`, `%y` and `%p` values you can also use `.precision`, for example `%x.2` means that value of X will be rounded to 2 digits after the decimal point.  
   If no precision or dateFormat is set then plugin uses tickFormatter to format values displayed on tooltip.  
@@ -58,7 +58,7 @@ In comments there are default values
   The content callback function pass may also return a boolean value of false (or empty string) if the tooltip is to be hidden for the given data point.
   Pull request [#64](https://github.com/krzysu/flot.tooltip/pull/64) introduced two more placeholders `%lx` and `%ly`, that work with flot-axislabels plugin.  
   Pull request [#75](https://github.com/krzysu/flot.tooltip/pull/75) introduced `%ct` placeholder for any custom text withing label (see example in `examples/custom-label-text.html`)  
-  Pull request [#112](https://github.com/krzysu/flot.tooltip/pull/112) introduced `%n` placeholder for the total number (rather than percent) represented by a single slice of a pie chart. 
+  Pull request [#112](https://github.com/krzysu/flot.tooltip/pull/112) introduced `%n` placeholder for the total number (rather than percent) represented by a single slice of a pie chart.
 -   `xDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `yDateFormat` : you can use the same specifiers as in Flot, for time mode data
 -   `monthNames` : check [#28](https://github.com/krzysu/flot.tooltip/issues/28)
@@ -78,7 +78,7 @@ In comments there are default values
 -   [tickRotor](https://github.com/markrcote/flot-tickrotor)
 -   [stackpercent](https://github.com/skeleton9/flot.stackpercent)
 -   [time] (http://www.flotcharts.org/flot/examples/axes-time/index.html)
--   [curvedLines] (http://curvedlines.michaelzinsmaier.de/) 
+-   [curvedLines] (http://curvedlines.michaelzinsmaier.de/)
 
 ## For developers/contributors
 
@@ -91,6 +91,10 @@ There exists a Gruntfile.js for development purposes, but please do not commit b
 when the pull request is merged and how many other changes were made at the same time.
 
 ## Changelog
+
+### v0.8.7
+
+-   merged pull request: [#138](https://github.com/krzysu/flot.tooltip/pull/138),
 
 ### v0.8.6
 
@@ -166,7 +170,7 @@ when the pull request is merged and how many other changes were made at the same
 
 ### v0.6 and v0.6.1
 
--   nothing from user perspective :) 
+-   nothing from user perspective :)
 -   another refactoring, `FlotTooltip` object structure changed to allow many instances to fix issue #13 (regression after v0.5 refactoring)
 
 ### v0.5.1
@@ -204,7 +208,7 @@ when the pull request is merged and how many other changes were made at the same
 ### v0.4
 
 Now you can easily set precision of values displayed on tip thanks to enhanced _string formatter_.
-Just put your desired precision after value in format like this `%x.precision`, 
+Just put your desired precision after value in format like this `%x.precision`,
 where _precision_ is a number of digits to appear after the decimal point. It uses `number.toFixed(precision)` function internally.
 
 What is more _string formatter_ was rewritten and now is RegExp based.
@@ -257,8 +261,9 @@ From now on also minified version is available.
 -   [@willianganzert](https://github.com/willianganzert) - pull request [#83](https://github.com/krzysu/flot.tooltip/pull/83), Add "id" to tooltip element
 -   [@larsenmtl](https://github.com/larsenmtl) - pull request [#85](https://github.com/krzysu/flot.tooltip/pull/85), Support for stacked percent plugin
 -   [@RoboterHund](https://github.com/RoboterHund) - pull request [#87](https://github.com/krzysu/flot.tooltip/pull/86), Compatibility fix for older versions of jQuery
+-   and many more, check merged pull requests
 
 * * *
-Copyright (c) 2011-2014 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
+Copyright (c) 2011-2016 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
 
 __jquery.flot.tooltip__ is available under the MIT license.

@@ -2,11 +2,11 @@
  * jquery.flot.tooltip
  * 
  * description: easy-to-use tooltips for Flot charts
- * version: 0.8.6
+ * version: 0.8.7
  * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
  * website: https://github.com/krzysu/flot.tooltip
  * 
- * build on 2016-02-25
+ * build on 2016-03-15
  * released under MIT License, 2012
 */ 
 (function ($) {
@@ -326,23 +326,26 @@
      * @return jQuery object
      */
     FlotTooltip.prototype.getDomElement = function () {
-        var $tip = $('.' + this.tooltipOptions.cssClass);
+        var $tip = $('<div>');
+        if (this.tooltipOptions && this.tooltipOptions.cssClass) {
+            $tip = $('.' + this.tooltipOptions.cssClass);
 
-        if( $tip.length === 0 ){
-            $tip = $('<div />').addClass(this.tooltipOptions.cssClass);
-            $tip.appendTo('body').hide().css({position: 'absolute'});
-
-            if(this.tooltipOptions.defaultTheme) {
-                $tip.css({
-                    'background': '#fff',
-                    'z-index': '1040',
-                    'padding': '0.4em 0.6em',
-                    'border-radius': '0.5em',
-                    'font-size': '0.8em',
-                    'border': '1px solid #111',
-                    'display': 'none',
-                    'white-space': 'nowrap'
-                });
+            if( $tip.length === 0 ){
+                $tip = $('<div />').addClass(this.tooltipOptions.cssClass);
+                $tip.appendTo('body').hide().css({position: 'absolute'});
+    
+                if(this.tooltipOptions.defaultTheme) {
+                    $tip.css({
+                        'background': '#fff',
+                        'z-index': '1040',
+                        'padding': '0.4em 0.6em',
+                        'border-radius': '0.5em',
+                        'font-size': '0.8em',
+                        'border': '1px solid #111',
+                        'display': 'none',
+                        'white-space': 'nowrap'
+                    });
+                }
             }
         }
 
