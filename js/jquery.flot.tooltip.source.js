@@ -249,6 +249,7 @@
             var totalTipHeight = $tip.outerHeight() + that.tooltipOptions.shifts.y;
             if ((pos.x - $(window).scrollLeft()) > ($(window)[that.wfunc]() - totalTipWidth)) {
                 pos.x -= totalTipWidth;
+                pos.x = Math.max(pos.x, 0);
             }
             if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
                 pos.y -= totalTipHeight;
