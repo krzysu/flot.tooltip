@@ -299,7 +299,7 @@
                 return;
 
             $tip.html(tipText);
-            plot.setTooltipPosition({ x: position.pageX, y: position.pageY });
+            plot.setTooltipPosition({ x: that.tipPosition.x, y: that.tipPosition.y });
             $tip.css({
                 left: that.tipPosition.x + that.tooltipOptions.shifts.x,
                 top: that.tipPosition.y + that.tooltipOptions.shifts.y
