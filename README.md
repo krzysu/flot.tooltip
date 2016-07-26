@@ -1,3 +1,8 @@
+# IMPORTANT
+
+**This repository is no longer actively maintained! All pull request or issues will be ignored starting from 1st of August 2016.
+If you want to become a new owner and main contributor, please write me an email. You can find my email address on my personal website, linked in my github profile.**
+
 # jquery.flot.tooltip
 __tooltip plugin for wonderful Flot plotting library__
 
