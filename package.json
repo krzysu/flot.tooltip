@@ -1,6 +1,6 @@
 {
   "name": "jquery.flot.tooltip",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "description": "easy-to-use tooltips for Flot charts",
   "website": "https://github.com/krzysu/flot.tooltip",
   "directories": {
