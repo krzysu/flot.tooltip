@@ -253,6 +253,7 @@
             }
             if ((pos.y - $(window).scrollTop()) > ($(window)[that.hfunc]() - totalTipHeight)) {
                 pos.y -= totalTipHeight;
+                pos.y = Math.max(pos.y, 0);
             }
 
 	    /*
