@@ -243,7 +243,7 @@ From now on also minified version is available.
 
 ## Contributors
 
--   [@Roundaround](https://github.com/Roundaround) - continuous contributor and co-author
+-   [@Roundaround](https://github.com/Roundaround) - core project contributor
 -   [@ismyrnow](https://github.com/ismyrnow) - add jquery.flot.pie plugin support
 -   [@fmsf](https://github.com/fmsf) - `content` can be a function
 -   [@pdelanauze](https://github.com/pdelanauze) - upgrade to gruntjs v0.4 + memory usage optimization
@@ -267,6 +267,6 @@ From now on also minified version is available.
 -   and many more, check merged pull requests
 
 * * *
-Copyright (c) 2011-2016 Krzysztof Urbas (@krzysu) & Evan Steinkerchner (@Roundaround).
+Copyright (c) 2011-2016 Krzysztof Urbas (@krzysu).
 
 __jquery.flot.tooltip__ is available under the MIT license.
