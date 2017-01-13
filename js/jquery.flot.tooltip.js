@@ -529,10 +529,16 @@
         if (typeof item.series.xaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(xPatternWithoutPrecision, item.series.xaxis.tickFormatter(x, item.series.xaxis).replace(/\$/g, '$$'));
+        } else {
+            // replace %x even if xaxis is not shown
+            content = content.replace(xPatternWithoutPrecision, x);
         }
         if (typeof item.series.yaxis.tickFormatter !== 'undefined') {
             //escape dollar
             content = content.replace(yPatternWithoutPrecision, item.series.yaxis.tickFormatter(y, item.series.yaxis).replace(/\$/g, '$$'));
+        } else {
+            // replace %y even if yaxis is not shown
+            content = content.replace(yPatternWithoutPrecision, y);
         }
 
         return content;
