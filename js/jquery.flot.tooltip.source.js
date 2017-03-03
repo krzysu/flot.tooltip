@@ -496,7 +496,11 @@
                 if (item.series.xaxis[ticks].hasOwnProperty(tickIndex) && !this.isTimeMode('xaxis', item)) {
                     var valueX = (this.isCategoriesMode('xaxis', item)) ? item.series.xaxis[ticks][tickIndex].label : item.series.xaxis[ticks][tickIndex].v;
                     if (valueX === x) {
-                        content = content.replace(xPattern, item.series.xaxis[ticks][tickIndex].label.replace(/\$/g, '$$$$'));
+                        var replacementX = item.series.xaxis[ticks][tickIndex].label.replace(/\$/g, "$$$$");
+                        if (replacementX === "" || replacementX == null)
+                            replacementX = x;
+
+                        content = content.replace(xPattern, replacementX);
                     }
                 }
             }
@@ -508,7 +512,11 @@
                 if (item.series.yaxis.ticks.hasOwnProperty(yIndex)) {
                     var valueY = (this.isCategoriesMode('yaxis', item)) ? item.series.yaxis.ticks[yIndex].label : item.series.yaxis.ticks[yIndex].v;
                     if (valueY === y) {
-                        content = content.replace(yPattern, item.series.yaxis.ticks[yIndex].label.replace(/\$/g, '$$$$'));
+                        var replacementY = item.series.yaxis.ticks[yIndex].label.replace(/\$/g, "$$$$");
+                        if (replacementY === "" || replacementY == null)
+                            replacementY = y;
+
+                        content = content.replace(yPattern, replacementY);
                     }
                 }
             }
